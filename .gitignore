@@ -1,0 +1,48 @@
+## Build Folders
+bin/
+obj/
+
+## User-Specific Files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## IDE and Editor Artifacts
+.vscode/
+.vs/
+
+## Test Output
+TestResult*/
+*.log
+*.coverage
+*.coveragejson
+
+## NuGet Packages
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+*.nuspec
+
+## ASP.NET Stuff
+wwwroot/
+node_modules/
+bower_components/
+
+## Others
+*.dbmdl
+*.dbproj
+*.pdb
+*.mdb
+*.opendb
+
+## OS-Specific
+.DS_Store
+Thumbs.db
+
+
+## Ignoring RunSettings And Connection Files.
+
+**/*.runsettings
+**/*.connection.json

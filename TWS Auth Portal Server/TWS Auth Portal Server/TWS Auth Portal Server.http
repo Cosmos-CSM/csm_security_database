@@ -1,0 +1,6 @@
+@TWS_Auth_Portal_Server_HostAddress = http://localhost:5224
+
+GET {{TWS_Auth_Portal_Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
