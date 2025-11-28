@@ -6,18 +6,18 @@ using CSM_Database_Testing.Disposing.Abstractions.Bases;
 
 using CSM_Security_Database_Core;
 
-namespace CSM_Security_Database_Testing;
+namespace CSM_Security_Database_Testing.Abstractions.Bases;
 
 /// <summary>
-///     Represents an [CSM Database Security] integration tests base.
+///     Represents an <see cref="SecurityDatabase"/> integration tests base for a Depot.
 /// </summary>
 /// <typeparam name="TEntity">
-///     Type of the <see cref="IEntity"/> tests are based on.
+///     Type of the <see cref="IEntity"/> being handled.
 /// </typeparam>
 /// <typeparam name="TDepot">
-///     Type of the <see cref="IDepot{IEntity}"/> tests are based on.    
+///     Type of the <see cref="IDepot{TEntity}"/> being tested.
 /// </typeparam>
-public abstract class BSecurityDepot_IntegrationTests<TEntity, TDepot>
+public abstract class SecurityDepotIntegrationTestsBase<TEntity, TDepot>
     : TestingDepotBase<TEntity, TDepot, SecurityDatabase>
     where TEntity : class, IEntity, new()
     where TDepot : class, IDepot<TEntity> {
@@ -26,16 +26,12 @@ public abstract class BSecurityDepot_IntegrationTests<TEntity, TDepot>
     ///     Creates a new instance.
     /// </summary>
     /// <param name="databaseFactory">
-    ///     Factory for the main <typeparamref name="TEntity"/> database context handler to be used.
+    ///     Main database factory 
     /// </param>
     /// <param name="databaseFactories">
     ///     Collateral used databases factories to be used, this are usually needed when the <typeparamref name="TEntity"/> used has dependencies on a different <see cref="IDatabase"/> source than it's own context.
     /// </param>
-    protected BSecurityDepot_IntegrationTests(
-        DatabaseFactory? databaseFactory = null,
-        params DatabaseFactory[] databaseFactories
-    )
-    : base("CSMS", databaseFactory, databaseFactories) {
-
+    protected SecurityDepotIntegrationTestsBase(DatabaseFactory? databaseFactory = null)
+        : base(databaseFactory) {
     }
 }

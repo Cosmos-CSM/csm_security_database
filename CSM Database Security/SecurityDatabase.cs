@@ -2,8 +2,6 @@
 using CSM_Database_Core.Abstractions.Interfaces;
 using CSM_Database_Core.Core.Models;
 
-using Microsoft.EntityFrameworkCore;
-
 namespace CSM_Security_Database_Core;
 
 /// <summary>
@@ -15,38 +13,22 @@ public class SecurityDatabase
     /// <summary>
     ///     Database signature
     /// </summary>
-    const string _SIGN = "CSMS";
+    public override string Sign { get; } = "CSMS";
 
     /// <summary>
     ///     Creates a new instance.
     /// </summary>
-    /// <param name="connectionOptions">
-    ///     Connection options.
-    /// </param>
-    public SecurityDatabase(ConnectionOptions connectionOptions)
-        : base(_SIGN, connectionOptions) {
+    public SecurityDatabase()
+        : base() {
     }
 
     /// <summary>
     ///     Creates a new instance.
     /// </summary>
-    /// <param name="dbContextOptions">
-    ///     EF DbContext options.
+    /// <param name="databaseOptions">
+    ///     Database context options.
     /// </param>
-    public SecurityDatabase(DbContextOptions<SecurityDatabase> dbContextOptions)
-        : base(_SIGN, dbContextOptions) { 
-    }
-
-    /// <summary>
-    ///     Creates a new instance.
-    /// </summary>
-    /// <param name="connectionOptions">
-    ///     Connection options.
-    /// </param>
-    /// <param name="dbContextOptions">
-    ///     EF DbContext options.
-    /// </param>
-    public SecurityDatabase(ConnectionOptions connectionOptions, DbContextOptions<SecurityDatabase> dbContextOptions)
-        : base(_SIGN, connectionOptions, dbContextOptions) {
+    public SecurityDatabase(DatabaseOptions<SecurityDatabase> databaseOptions)
+        : base(databaseOptions) {
     }
 }
