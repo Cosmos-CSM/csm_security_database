@@ -3,7 +3,7 @@ using CSM_Database_Core.Entities.Abstractions.Interfaces;
 
 using CSM_Security_Database_Core.Abstractions.Bases;
 
-namespace CSM_Security_Database_Core.Entities.Actions;
+namespace CSM_Security_Database_Core.Entities;
 
 /// <summary>
 ///     Represents an available ecosystem action.

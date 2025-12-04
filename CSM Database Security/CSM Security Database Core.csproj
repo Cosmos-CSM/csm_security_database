@@ -11,4 +11,10 @@
 	  <PackageReference Include="CSM.Database.Core" Version="2.1.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Entities\Abstractions\Interfaces\" />
+	  <Folder Include="Entities\Abstractions\Bases\" />
+	  <Folder Include="Entities\Actions\" />
+	</ItemGroup>
+
 </Project>

@@ -63,7 +63,7 @@ public class Permit
     ///     Auto included relation.
     /// </remarks>
     [EntityRelation]
-    public Actions.Action Action { get; set; } = default!;
+    public Action Action { get; set; } = default!;
 
     #endregion
 
@@ -99,7 +99,7 @@ public class Permit
                 Required: true,
                 Auto: true
             );
-        etBuilder.Link<Permit, Actions.Action>(
+        etBuilder.Link<Permit, Action>(
                 nameof(Action),
                 Required: true,
                 Auto: true
