@@ -3,7 +3,7 @@
 using CSM_Foundation_Core.Core.Extensions;
 using CSM_Foundation_Core.Core.Utils;
 
-using CSM_Security_Database_Core.Entities.Users;
+using CSM_Security_Database_Core.Entities;
 
 namespace CSM_Security_Database_Testing.Utils;
 

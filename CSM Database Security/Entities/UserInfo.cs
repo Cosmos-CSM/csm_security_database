@@ -4,7 +4,7 @@ using CSM_Security_Database_Core.Abstractions.Bases;
 
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CSM_Security_Database_Core.Entities.Users;
+namespace CSM_Security_Database_Core.Entities;
 
 public interface IUserInfo {
 
@@ -50,7 +50,7 @@ public interface IUserInfo {
 }
 
 /// <summary>
-///     Represents the <see cref="Users.User"/> identification information.
+///     Represents the <see cref="Entities.User"/> identification information.
 /// </summary>
 public class UserInfo
     : SecurityEntityBase, IUserInfo {

@@ -5,6 +5,6 @@ using CSM_Security_Database_Core.Entities;
 namespace CSM_Security_Database_Core.Depots.Abstractions.Interfaces;
 
 
-public interface IActionsDepot 
-    : IDepot<IAction> {
+public interface IActionsDepot
+    : IDepot<Entities.Action, IAction> {
 }

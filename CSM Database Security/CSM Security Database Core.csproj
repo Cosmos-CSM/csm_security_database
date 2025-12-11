@@ -8,13 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CSM.Database.Core" Version="2.1.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Entities\Abstractions\Interfaces\" />
-	  <Folder Include="Entities\Abstractions\Bases\" />
-	  <Folder Include="Entities\Actions\" />
+	  <PackageReference Include="CSM.Database.Core" Version="3.0.0" />
 	</ItemGroup>
 
 </Project>

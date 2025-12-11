@@ -17,10 +17,11 @@ namespace CSM_Security_Database_Testing.Abstractions.Bases;
 /// <typeparam name="TDepot">
 ///     Type of the <see cref="IDepot{TEntity}"/> being tested.
 /// </typeparam>
-public abstract class SecurityDepotIntegrationTestsBase<TEntity, TDepot>
-    : TestingDepotBase<TEntity, TDepot, SecurityDatabase>
-    where TEntity : class, IEntity, new()
-    where TDepot : class, IDepot<TEntity> {
+public abstract class SecurityDepotIntegrationTestsBase<TEntityInterface, TEntity, TDepot>
+    : TestingDepotBase<TEntityInterface, TEntity, TDepot, SecurityDatabase>
+    where TEntityInterface : IEntity
+    where TEntity : class, TEntityInterface, new()
+    where TDepot : class, IDepot<TEntity, TEntityInterface> {
 
     /// <summary>
     ///     Creates a new instance.

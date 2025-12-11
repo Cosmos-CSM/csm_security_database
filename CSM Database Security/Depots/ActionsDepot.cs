@@ -10,7 +10,7 @@ namespace CSM_Security_Database_Core.Depots;
 
 
 public class ActionsDepot
-    : DepotBase<SecurityDatabase, IAction>,
+    : DepotBase<SecurityDatabase, Entities.Action, IAction>,
     IActionsDepot {
 
     public ActionsDepot(SecurityDatabase Database, IDisposer<IEntity>? Disposer) : base(Database, Disposer) {

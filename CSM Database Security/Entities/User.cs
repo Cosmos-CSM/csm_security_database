@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using SecurityEntityBase = CSM_Security_Database_Core.Abstractions.Bases.SecurityEntityBase;
 
-namespace CSM_Security_Database_Core.Entities.Users;
+namespace CSM_Security_Database_Core.Entities;
 
 /// <summary>
 ///     Represents the possible <see cref="IUser"/> types.

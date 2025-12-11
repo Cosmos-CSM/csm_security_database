@@ -1,7 +1,6 @@
-﻿using CSM_Database_Core.Core.Attributes;
-
+﻿
 using CSM_Security_Database_Core.Abstractions.Bases;
-using CSM_Security_Database_Core.Entities.Users;
+using CSM_Security_Database_Core.Entities.Abstractions.Interfaces;
 
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,23 +10,9 @@ namespace CSM_Security_Database_Core.Entities;
 ///     [Entity] that stores a relation between a collection of <see cref="Permit"/> with an <see cref="User"/>
 /// </summary>
 public class Profile
-    : SecurityNamedEntityBase {
-
-    #region Relations
-
-    /// <summary>
-    ///     <see cref="Permit"/> related to this <see cref="Profile"/>.
-    /// </summary>
-    [EntityRelation]
-    public ICollection<Permit> Permits { get; set; } = default!;
-
-    /// <summary>
-    ///     <see cref="User"/> related to this <see cref="Profile"/>.
-    /// </summary>
-    [EntityRelation]
-    public ICollection<User> Accounts { get; set; } = default!;
-
-    #endregion
+    : SecurityCatalogEntityBase, IProfile {
+    public ICollection<Permit> Permits { get; set; }
+    public ICollection<User> Accounts { get; set; }
 
     protected override void DesignEntity(EntityTypeBuilder etBuilder) {
 

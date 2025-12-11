@@ -6,7 +6,7 @@ using CSM_Security_Database_Core.Abstractions.Bases;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CSM_Security_Database_Core.Entities.Solutions;
+namespace CSM_Security_Database_Core.Entities;
 
 /// <summary>
 ///     Represents an item into the solutions ecosystem representing a solution identification along the ecosystem.
