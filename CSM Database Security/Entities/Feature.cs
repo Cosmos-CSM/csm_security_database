@@ -1,5 +1,6 @@
-﻿using CSM_Security_Database_Core.Abstractions.Bases;
-using CSM_Security_Database_Core.Entities.Abstractions.Interfaces;
+﻿using CSM_Database_Core.Core.Attributes;
+
+using CSM_Security_Database_Core.Abstractions.Bases;
 
 namespace CSM_Security_Database_Core.Entities;
 
@@ -7,7 +8,11 @@ namespace CSM_Security_Database_Core.Entities;
 ///     Represents an ecosystem complex feature.
 /// </summary>
 public class Feature
-    : SecurityCatalogEntityBase, IFeature {
+    : SecurityCatalogEntityBase {
 
+    /// <summary>
+    ///     Permits data.
+    /// </summary>
+    [EntityRelation]
     public ICollection<Permit> Permits { get; set; } = [];
 }

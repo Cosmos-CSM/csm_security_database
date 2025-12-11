@@ -9,8 +9,11 @@ namespace CSM_Security_Database_Core.Entities;
 ///     Represents an available ecosystem action.
 /// </summary>
 public class Action
-    : SecurityCatalogEntityBase, IAction {
+    : SecurityCatalogEntityBase {
 
+    /// <summary>
+    ///     Permits data.
+    /// </summary>
     [EntityRelation]
     public ICollection<Permit> Permits { get; set; } = [];
 }

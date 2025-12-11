@@ -1,6 +1,5 @@
 ﻿using CSM_Database_Core.Core.Attributes;
 using CSM_Database_Core.Core.Extensions;
-using CSM_Database_Core.Entities.Abstractions.Interfaces;
 
 using CSM_Security_Database_Core.Core;
 
@@ -25,86 +24,50 @@ public enum UserTypes {
     /// </summary>
     PERSON,
 }
-public interface IUser
-    : IEntity {
 
-    #region Properties
+/// <summary>
+///     Represents an ecosystem user.
+/// </summary>
+public class User
+    : SecurityEntityBase {
 
     /// <summary>
     ///     User username.
     /// </summary>
-    string Username { get; set; }
+    public string Username { get; set; } = string.Empty;
 
     /// <summary>
     ///     User password.
     /// </summary>
-    byte[] Password { get; set; }
+    public byte[] Password { get; set; } = null!;
 
     /// <summary>
     ///     User type.
     /// </summary>
-    UserTypes Type { get; set; }
-
-    /// <summary>
-    ///     Whether has total ecosystem access.
-    /// </summary>
-    bool IsMaster { get; set; }
-
-    #endregion
-
-    #region Relations
-
-    [EntityRelation]
-    IUserInfo UserInfo { get; set; }
-
-    /// <summary>
-    ///     <see cref="Permit"/> related to this <see cref="User"/>
-    /// </summary>
-    [EntityRelation]
-    ICollection<Permit> Permits { get; set; }
-
-    /// <summary>
-    ///     <see cref="Profile"/> related to this <see cref="User"/>
-    /// </summary>
-    [EntityRelation]
-    ICollection<Profile> Profiles { get; set; }
-
-    #endregion
-}
-
-public class User
-    : SecurityEntityBase, IUser {
-
-    #region Properties
-
-    public string Username { get; set; } = string.Empty;
-
-    public byte[] Password { get; set; } = null!;
-
     public UserTypes Type { get; set; } = UserTypes.PERSON;
 
+    /// <summary>
+    ///     Whether the user is master.
+    /// </summary>
     public bool IsMaster { get; set; } = false;
 
-    #endregion
-
-    #region Relations
-
+    /// <summary>
+    ///     User information data.
+    /// </summary>
     [EntityRelation]
-    public IUserInfo UserInfo { get; set; } = default!;
+    public UserInfo UserInfo { get; set; } = default!;
 
     /// <summary>
-    ///     <see cref="Permit"/> related to this <see cref="User"/>
+    ///     Permits data.
     /// </summary>
     [EntityRelation]
     public ICollection<Permit> Permits { get; set; } = [];
 
     /// <summary>
-    ///     <see cref="Profile"/> related to this <see cref="User"/>
+    ///     Profiles data.
     /// </summary>
     [EntityRelation]
     public ICollection<Profile> Profiles { get; set; } = [];
-
-    #endregion
 
     protected override void DesignEntity(EntityTypeBuilder etBuilder) {
         etBuilder.HasIndex(nameof(Username))
@@ -126,7 +89,7 @@ public class User
 
         etBuilder
             .HasMany(nameof(Permits))
-            .WithMany(nameof(Permit.Accounts))
+            .WithMany(nameof(Permit.Users))
             .UsingEntity(
                 Constants.Connectors.AccountsPermits.Connector,
                 con => con.HasOne(typeof(Permit)).WithMany().HasForeignKey(Constants.Connectors.AccountsPermits.Permit).OnDelete(DeleteBehavior.Cascade),
@@ -135,7 +98,7 @@ public class User
 
         etBuilder
             .HasMany(nameof(Profiles))
-            .WithMany(nameof(Profile.Accounts))
+            .WithMany(nameof(Profile.Users))
             .UsingEntity(
                 Constants.Connectors.AccountsProfiles.Connector,
                 con => con.HasOne(typeof(Profile)).WithMany().HasForeignKey(Constants.Connectors.AccountsProfiles.Profile).OnDelete(DeleteBehavior.Cascade),

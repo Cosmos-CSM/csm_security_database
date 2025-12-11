@@ -1,5 +1,6 @@
-﻿using CSM_Database_Core.Core.Attributes;
-using CSM_Database_Core.Entities.Abstractions.Interfaces;
+﻿using System.ComponentModel.DataAnnotations;
+
+using CSM_Database_Core.Core.Attributes;
 
 using CSM_Security_Database_Core.Abstractions.Bases;
 
@@ -9,33 +10,20 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace CSM_Security_Database_Core.Entities;
 
 /// <summary>
-///     Represents an item into the solutions ecosystem representing a solution identification along the ecosystem.
+///     Represents a solution metadata info into the ecosystem.
 /// </summary>
-public interface ISolution
-    : INamedEntity {
+public class Solution
+    : SecurityNamedEntityBase {
 
     /// <summary>
-    ///     Solution unique signature to reference easily the solution along operations.
+    ///     Unique solution signature.
     /// </summary>
-    /// <remarks>
-    ///     Must be unique. 
-    ///     5 Fixed Length.
-    /// </remarks>
-    string Sign { get; set; }
+    [StringLength(5, MinimumLength = 5)]
+    public string Sign { get; set; } = string.Empty;
 
     /// <summary>
     ///     Permits data.
     /// </summary>
-    [EntityRelation]
-    ICollection<Permit> Permits { get; set; }
-}
-
-/// <inheritdoc cref="ISolution"/>
-public class Solution
-    : SecurityNamedEntityBase, ISolution {
-
-    public string Sign { get; set; } = string.Empty;
-
     [EntityRelation]
     public ICollection<Permit> Permits { get; set; } = [];
 
