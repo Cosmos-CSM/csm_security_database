@@ -11,7 +11,7 @@ namespace CSM_Security_Database_Testing.Utils;
 /// <summary>
 ///     Handles [CSM Security Database] objects drafting for testing purposes.
 /// </summary>
-public static class DraftUtils {
+static public class DraftUtils {
 
     /// <summary>
     ///     Gets a new random 16 length string.
@@ -43,5 +43,14 @@ public static class DraftUtils {
         }
 
         return @ref;
+    }
+
+    static public CSM_Security_Database_Core.Entities.Action Action(CSM_Security_Database_Core.Entities.Action? @ref = null) {
+        @ref ??= new();
+
+        @ref.Id = 0;
+        @ref.Permits ??= [];
+        
+
     }
 }

@@ -1,7 +1,6 @@
 ﻿using CSM_Database_Core.Core.Attributes;
 
 using CSM_Security_Database_Core.Abstractions.Bases;
-using CSM_Security_Database_Core.Entities.Abstractions.Interfaces;
 
 namespace CSM_Security_Database_Core.Entities;
 

@@ -17,11 +17,10 @@ namespace CSM_Security_Database_Testing.Abstractions.Bases;
 /// <typeparam name="TDepot">
 ///     Type of the <see cref="IDepot{TEntity}"/> being tested.
 /// </typeparam>
-public abstract class SecurityDepotIntegrationTestsBase<TEntityInterface, TEntity, TDepot>
-    : TestingDepotBase<TEntityInterface, TEntity, TDepot, SecurityDatabase>
-    where TEntityInterface : IEntity
-    where TEntity : class, TEntityInterface, new()
-    where TDepot : class, IDepot<TEntity, TEntityInterface> {
+public abstract class TestingSecurityDatabaseDepotBase<TEntity, TDepot>
+    : TestingDepotBase<TEntity, TDepot, SecurityDatabase>
+    where TEntity : class, IEntity, new()
+    where TDepot : class, IDepot<TEntity> {
 
     /// <summary>
     ///     Creates a new instance.
@@ -32,7 +31,7 @@ public abstract class SecurityDepotIntegrationTestsBase<TEntityInterface, TEntit
     /// <param name="databaseFactories">
     ///     Collateral used databases factories to be used, this are usually needed when the <typeparamref name="TEntity"/> used has dependencies on a different <see cref="IDatabase"/> source than it's own context.
     /// </param>
-    protected SecurityDepotIntegrationTestsBase(DatabaseFactory? databaseFactory = null)
+    protected TestingSecurityDatabaseDepotBase(DatabaseFactory? databaseFactory = null)
         : base(databaseFactory) {
     }
 }

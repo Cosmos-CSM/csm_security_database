@@ -1,10 +1,10 @@
 ﻿using CSM_Database_Core.Depots.Abstractions.Interfaces;
 
-using CSM_Security_Database_Core.Entities.Abstractions.Interfaces;
-
 namespace CSM_Security_Database_Core.Depots.Abstractions.Interfaces;
 
-
+/// <summary>
+///     Represents an entities depot provider for <see cref="Entities.Action"/> entity.
+/// </summary>
 public interface IActionsDepot
-    : IDepot<Entities.Action, IAction> {
+    : IDepot<Entities.Action> {
 }
