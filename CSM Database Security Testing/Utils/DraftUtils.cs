@@ -1,9 +1,13 @@
 ﻿using System.Text;
 
+using CSM_Database_Testing;
+
 using CSM_Foundation_Core.Core.Extensions;
 using CSM_Foundation_Core.Core.Utils;
 
 using CSM_Security_Database_Core.Entities;
+
+using Action = CSM_Security_Database_Core.Entities.Action;
 
 namespace CSM_Security_Database_Testing.Utils;
 
@@ -19,20 +23,16 @@ static public class DraftUtils {
     static string Epy => RandomUtils.String(16);
 
     /// <summary>
-    ///     Drafts an <see cref="Entities.Accounts.Account"/> entity.
+    ///     Drafts an <see cref="User"/> data.
     /// </summary>
     /// <param name="ref">
-    ///     Reference data to keep.
+    ///     Default entity data.
     /// </param>
     /// <returns>
-    ///     A drafted instance.
+    ///     A drafted <see cref="User"/>.
     /// </returns>
     static public User Account(User? @ref = null) {
-        @ref ??= new User();
-
-        @ref.Id = 0;
-        @ref.Permits ??= [];
-        @ref.Profiles ??= [];
+        @ref ??= BaseDraftUtils.Entity(@ref);
 
         if (string.IsNullOrWhiteSpace(@ref.Username)) {
             @ref.Username = $"{Epy}_usr";
@@ -45,12 +45,16 @@ static public class DraftUtils {
         return @ref;
     }
 
-    static public CSM_Security_Database_Core.Entities.Action Action(CSM_Security_Database_Core.Entities.Action? @ref = null) {
-        @ref ??= new();
-
-        @ref.Id = 0;
-        @ref.Permits ??= [];
-        
-
+    /// <summary>
+    ///     Drafts an <see cref="CSM_Security_Database_Core.Entities.Action"/> data.
+    /// </summary>
+    /// <param name="ref">
+    ///     Default entity data.
+    /// </param>
+    /// <returns>
+    ///     A drafted <see cref="CSM_Security_Database_Core.Entities.Action"/>.
+    /// </returns>
+    static public Action Action(Action? @ref = null) {
+        return BaseDraftUtils.CatalogEntity(@ref);
     }
 }
