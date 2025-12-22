@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CSM Database Security\CSM Security Database Core.csproj" />
+    <ProjectReference Include="..\CSM Database Security Core\CSM Security Database Core.csproj" />
   </ItemGroup>
 
 </Project>

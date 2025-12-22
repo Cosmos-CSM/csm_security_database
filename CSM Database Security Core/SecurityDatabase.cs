@@ -2,6 +2,10 @@
 using CSM_Database_Core.Abstractions.Interfaces;
 using CSM_Database_Core.Core.Models;
 
+using CSM_Security_Database_Core.Entities;
+
+using Microsoft.EntityFrameworkCore;
+
 namespace CSM_Security_Database_Core;
 
 /// <summary>
@@ -20,6 +24,8 @@ public class SecurityDatabase
     /// </summary>
     public SecurityDatabase()
         : base() {
+
+        Console.WriteLine("Hellooooo");
     }
 
     /// <summary>
@@ -31,4 +37,9 @@ public class SecurityDatabase
     public SecurityDatabase(DatabaseOptions<SecurityDatabase> databaseOptions)
         : base(databaseOptions) {
     }
+
+    /// <summary>
+    ///     Actions DB Set.
+    /// </summary>
+    public DbSet<Entities.Action> Actions { get; set; } = default!;
 }
