@@ -16,12 +16,22 @@ jobs:
       sqlserver:
         image: mcr.microsoft.com/mssql/server:2022-latest
         env:
-          SA_PASSWORD: "sa"
+          SA_PASSWORD: "Your_password123"
           ACCEPT_EULA: "Y"
         ports:
           - 1433:1433
         options: >-
-          --health-cmd "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'sa' -Q 'SELECT 1'"
+          --health-cmd "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Your_password123' -Q 'SELECT 1'"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 10
+
+    steps:
+      - name: Print SQL Server status
+        run: |
+          echo "Checking SQL Server health status..."
+          for i in {1..10}; do
+            /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Your_password123' -Q "SELECT 1" && echo "SQL Server is ready" && break
+            echo "SQL Server not ready yet..."
+            sleep 2
+          done
