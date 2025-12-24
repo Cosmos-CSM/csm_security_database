@@ -3,18 +3,23 @@ name: Run Integration Tests
 on:
   pull_request:
     branches: [ main ]
-    
+
 jobs:
   integration-tests:
     runs-on: ubuntu-latest
 
     env:
+      # 🔧 Update these two paths for your repo
       TEST_PROJECT_PATH: tests/YourProject.IntegrationTests
       DB_CONTEXT_PROJECT_PATH: src/YourProject.Infrastructure
 
+      # Shared connection string for migrations + tests
+      ConnectionStrings__DefaultConnection: "Server=localhost,1433;Database=TestDb;User Id=sa;Password=Your_password123;TrustServerCertificate=True"
+
     services:
       sqlserver:
-        image: mcr.microsoft.com/mssql/server:2022-latest
+        # ⚡ Fastest SQL Server option for CI
+        image: mcr.microsoft.com/azure-sql-edge
         env:
           SA_PASSWORD: "Your_password123"
           ACCEPT_EULA: "Y"
@@ -22,16 +27,34 @@ jobs:
           - 1433:1433
         options: >-
           --health-cmd "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Your_password123' -Q 'SELECT 1'"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 10
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 5
 
     steps:
-      - name: Print SQL Server status
+      # Required so the workflow actually triggers
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      # ⚡ Fast manual wait loop (1-second intervals)
+      - name: Wait for SQL Server
         run: |
-          echo "Checking SQL Server health status..."
-          for i in {1..10}; do
+          echo "Waiting for SQL Server to be ready..."
+          for i in {1..20}; do
             /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Your_password123' -Q "SELECT 1" && echo "SQL Server is ready" && break
             echo "SQL Server not ready yet..."
-            sleep 2
+            sleep 1
           done
+
+      # Control step to confirm DB is reachable
+      - name: Print SQL Server status
+        run: |
+          echo "Testing SQL Server connection..."
+          /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Your_password123' -Q "SELECT @@VERSION"
+
+      # (Next steps will go here: migrations + tests)
