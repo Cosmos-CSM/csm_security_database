@@ -3,8 +3,16 @@
 	<PropertyGroup>
 		<TargetFramework>net10.0</TargetFramework>
 		<RootNamespace>CSM_Security_Database_Core</RootNamespace>
+		<PackageId>CSM.Security.Database.Core</PackageId>
+		<Version>1.0.0</Version>
+		<Authors>Renato Urrea</Authors>
+		<Company>Cosmos (CSM)</Company>
+		<RepositoryUrl>https://github.com/Cosmos-CSM/csm_security_database</RepositoryUrl>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageReadmeFile>CHANGELOG.md</PackageReadmeFile>
+		<IsPackable>true</IsPackable>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -54,6 +62,10 @@
 	  <Content Remove="C:\Users\Usuar\.nuget\packages\microsoft.codeanalysis.workspaces.msbuild\4.14.0\contentFiles\any\any\BuildHost-netcore\tr\System.CommandLine.resources.dll" />
 	  <Content Remove="C:\Users\Usuar\.nuget\packages\microsoft.codeanalysis.workspaces.msbuild\4.14.0\contentFiles\any\any\BuildHost-netcore\zh-Hans\System.CommandLine.resources.dll" />
 	  <Content Remove="C:\Users\Usuar\.nuget\packages\microsoft.codeanalysis.workspaces.msbuild\4.14.0\contentFiles\any\any\BuildHost-netcore\zh-Hant\System.CommandLine.resources.dll" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="CHANGELOG.md" Pack="true" PackagePath="" />
 	</ItemGroup>
 
 	<ItemGroup>
