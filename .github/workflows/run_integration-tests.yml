@@ -9,53 +9,19 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      # 🔧 Update these two paths for your repo structure
       TEST_PROJECT_PATH: tests/YourProject.IntegrationTests
       DB_CONTEXT_PROJECT_PATH: src/YourProject.Infrastructure
-
-      # Database connection string used for migrations + tests
-      ConnectionStrings__DefaultConnection: "Server=localhost,1433;Database=TestDb;User Id=sa;Password=Your_password123;TrustServerCertificate=True"
 
     services:
       sqlserver:
         image: mcr.microsoft.com/mssql/server:2022-latest
         env:
-          SA_PASSWORD: "Your_password123"
+          SA_PASSWORD: "sa"
           ACCEPT_EULA: "Y"
         ports:
           - 1433:1433
         options: >-
-          --health-cmd "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Your_password123' -Q 'SELECT 1'"
+          --health-cmd "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'sa' -Q 'SELECT 1'"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 10
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 8.0.x
-
-      - name: Wait for SQL Server to be ready
-        run: |
-          for i in {1..30}; do
-            /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Your_password123' -Q "SELECT 1" && break
-            echo "SQL Server not ready yet..."
-            sleep 2
-          done
-
-      - name: Restore dependencies
-        run: dotnet restore
-
-      - name: Apply EF Core migrations
-        run: dotnet ef database update --project "$DB_CONTEXT_PROJECT_PATH"
-        env:
-          ConnectionStrings__DefaultConnection: ${{ env.ConnectionStrings__DefaultConnection }}
-
-      - name: Run integration tests
-        run: dotnet test "$TEST_PROJECT_PATH" --logger trx
-        env:
-          ConnectionStrings__DefaultConnection: ${{ env.ConnectionStrings__DefaultConnection }}
