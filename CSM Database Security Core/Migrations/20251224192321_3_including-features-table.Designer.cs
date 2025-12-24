@@ -4,6 +4,7 @@ using CSM_Security_Database_Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CSM_Security.Migrations
 {
     [DbContext(typeof(SecurityDatabase))]
-    partial class DatabaseModelSnapshot : ModelSnapshot
+    [Migration("20251224192321_3_including-features-table")]
+    partial class _3_includingfeaturestable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,56 +117,41 @@ namespace CSM_Security.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("ActionShadow")
-                        .HasColumnType("bigint")
-                        .HasColumnName("Action");
+                    b.Property<long?>("ActionId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("FeatureShadow")
-                        .HasColumnType("bigint")
-                        .HasColumnName("Feature");
+                    b.Property<long?>("FeatureId")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("IsEnabled")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Reference")
                         .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nchar(8)")
-                        .IsFixedLength();
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("SolutionShadow")
-                        .HasColumnType("bigint")
-                        .HasColumnName("Solution");
+                    b.Property<long?>("SolutionId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("Timestamp")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2(7)")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FeatureShadow");
+                    b.HasIndex("ActionId");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
+                    b.HasIndex("FeatureId");
 
-                    b.HasIndex("Reference")
-                        .IsUnique();
+                    b.HasIndex("SolutionId");
 
-                    b.HasIndex("SolutionShadow");
-
-                    b.HasIndex("ActionShadow", "SolutionShadow", "FeatureShadow");
-
-                    b.ToTable("Permits");
+                    b.ToTable("Permit");
                 });
 
             modelBuilder.Entity("CSM_Security_Database_Core.Entities.Profile", b =>
@@ -312,29 +300,17 @@ namespace CSM_Security.Migrations
 
             modelBuilder.Entity("CSM_Security_Database_Core.Entities.Permit", b =>
                 {
-                    b.HasOne("CSM_Security_Database_Core.Entities.Action", "Action")
+                    b.HasOne("CSM_Security_Database_Core.Entities.Action", null)
                         .WithMany("Permits")
-                        .HasForeignKey("ActionShadow")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("ActionId");
 
-                    b.HasOne("CSM_Security_Database_Core.Entities.Feature", "Feature")
+                    b.HasOne("CSM_Security_Database_Core.Entities.Feature", null)
                         .WithMany("Permits")
-                        .HasForeignKey("FeatureShadow")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("FeatureId");
 
-                    b.HasOne("CSM_Security_Database_Core.Entities.Solution", "Solution")
+                    b.HasOne("CSM_Security_Database_Core.Entities.Solution", null)
                         .WithMany("Permits")
-                        .HasForeignKey("SolutionShadow")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Action");
-
-                    b.Navigation("Feature");
-
-                    b.Navigation("Solution");
+                        .HasForeignKey("SolutionId");
                 });
 
             modelBuilder.Entity("PermitProfile", b =>

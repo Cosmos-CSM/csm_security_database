@@ -7,7 +7,7 @@ namespace CSM_Security_Database_Core;
 /// <summary>
 ///     EF Design time factory for <see cref="SecurityDatabase"/>
 /// </summary>
-public class SecurityDatabaseDesignFactory
+internal class SecurityDatabaseDesignFactory
     : IDesignTimeDbContextFactory<SecurityDatabase> {
 
 

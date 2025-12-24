@@ -23,22 +23,22 @@ static public class DraftUtils {
     static string Epy => RandomUtils.String(16);
 
     /// <summary>
-    ///     Drafts an <see cref="User"/> data.
+    ///     Drafts an <see cref="CSM_Security_Database_Core.Entities.User"/> data.
     /// </summary>
     /// <param name="ref">
     ///     Default entity data.
     /// </param>
     /// <returns>
-    ///     A drafted <see cref="User"/>.
+    ///     A drafted <see cref="CSM_Security_Database_Core.Entities.User"/>.
     /// </returns>
-    static public User Account(User? @ref = null) {
-        @ref ??= BaseDraftUtils.Entity(@ref);
+    static public User User(User? @ref = null) {
+        @ref = BaseDraftUtils.Entity(@ref);
 
         if (string.IsNullOrWhiteSpace(@ref.Username)) {
             @ref.Username = $"{Epy}_usr";
         }
 
-        if (@ref.Password.Empty()) {
+        if (@ref.Password == null || @ref.Password.Empty()) {
             @ref.Password = Encoding.UTF8.GetBytes($"{Epy}_pwd");
         }
 
@@ -56,5 +56,74 @@ static public class DraftUtils {
     /// </returns>
     static public Action Action(Action? @ref = null) {
         return BaseDraftUtils.CatalogEntity(@ref);
+    }
+
+    /// <summary>
+    ///     Drafts a <see cref="CSM_Security_Database_Core.Entities.Solution"/> data.
+    /// </summary>
+    /// <param name="ref">
+    ///     Default entity data.
+    /// </param>
+    /// <returns>
+    ///     A drafted <see cref="CSM_Security_Database_Core.Entities.Solution"/>.
+    /// </returns>
+    static public Solution Solution(Solution? @ref = null) {
+        @ref = BaseDraftUtils.NamedEntity(@ref);
+
+        if (string.IsNullOrWhiteSpace(@ref.Sign)) {
+            @ref.Sign = Epy[..5].ToUpper();
+        }
+
+
+        return @ref;
+    }
+
+    /// <summary>
+    ///     Drafts a <see cref="CSM_Security_Database_Core.Entities.Feature"/>
+    /// </summary>
+    /// <param name="ref">
+    ///     Default entity data.
+    /// </param>
+    /// <returns>
+    ///     A drafted <see cref="CSM_Security_Database_Core.Entities.Feature"/>.
+    /// </returns>
+    static public Feature Feature(Feature? @ref = null) {
+        @ref = BaseDraftUtils.CatalogEntity(@ref);
+
+        return @ref;
+    }
+
+    /// <summary>
+    ///     Drafts a <see cref="CSM_Security_Database_Core.Entities.Permit"/> data.
+    /// </summary>
+    /// <param name="ref">
+    ///     Default entity data.
+    /// </param>
+    /// <returns>
+    ///     A drafted <see cref="CSM_Security_Database_Core.Entities.Permit"/>.
+    /// </returns>
+    static public Permit Permit(Permit? @ref = null) {
+        @ref = BaseDraftUtils.CatalogEntity(@ref);
+
+        @ref.Solution = Solution(@ref.Solution);
+        @ref.Feature = Feature(@ref.Feature);
+        @ref.Action = Action(@ref.Action);
+
+        return @ref;
+    }
+
+    /// <summary>
+    ///     Drafts a <see cref="CSM_Security_Database_Core.Entities.Profile"/> data.
+    /// </summary>
+    /// <param name="ref">
+    ///     Default entity data.
+    /// </param>
+    /// <returns>
+    ///     A drafted <see cref="CSM_Security_Database_Core.Entities.Profile"/>.
+    /// </returns>
+    static public Profile Profile(Profile? @ref = null) {
+        @ref = BaseDraftUtils.CatalogEntity(@ref);
+
+        return @ref;
     }
 }

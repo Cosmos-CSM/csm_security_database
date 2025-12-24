@@ -1,15 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <RootNamespace>CSM_Security_Database_Testing</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CSM.Database.Testing" Version="4.1.0" />
-    <PackageReference Include="CSM.Foundation.Core" Version="2.0.0" />
+    <PackageReference Include="CSM.Database.Testing" Version="4.1.2" />
+    <PackageReference Include="CSM.Foundation.Core" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -24,8 +24,6 @@ public class SecurityDatabase
     /// </summary>
     public SecurityDatabase()
         : base() {
-
-        Console.WriteLine("Hellooooo");
     }
 
     /// <summary>
@@ -37,6 +35,31 @@ public class SecurityDatabase
     public SecurityDatabase(DatabaseOptions<SecurityDatabase> databaseOptions)
         : base(databaseOptions) {
     }
+
+    /// <summary>
+    ///     Users DB Set.
+    /// </summary>
+    public DbSet<User> Users { get; set; } = default!;
+
+    /// <summary>
+    ///     Permits DB Set.
+    /// </summary>
+    public DbSet<Permit> Permits { get; set; } = default!;
+
+    /// <summary>
+    ///     Profiles DB Set.
+    /// </summary>
+    public DbSet<Profile> Profiles { get; set; } = default!;
+
+    /// <summary>
+    ///     Features DB Set.
+    /// </summary>
+    public DbSet<Feature> Features { get; set; } = default!;
+
+    /// <summary>
+    ///     Solutions DB Set.
+    /// </summary>
+    public DbSet<Solution> Solutions { get; set; } = default!;
 
     /// <summary>
     ///     Actions DB Set.

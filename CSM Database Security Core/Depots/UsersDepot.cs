@@ -8,19 +8,20 @@ using CSM_Security_Database_Core.Entities;
 
 namespace CSM_Security_Database_Core.Depots;
 
-/// <inheritdoc cref="ISolutionsDepot"/>
-public class SolutionsDepot
-    : DepotBase<SecurityDatabase, Solution>, ISolutionsDepot {
+/// <inheritdoc cref="IUsersDepot"/>
+public class UsersDepot
+    : DepotBase<SecurityDatabase, User>, IUsersDepot {
 
     /// <summary>
     ///     Creates a new instance.
     /// </summary>
     /// <param name="Database">
-    ///     Security database context dependency.
+    ///     Security database context.
     /// </param>
     /// <param name="Disposer">
-    ///     Data disposition context manager.
+    ///     Data disposr context manager.
     /// </param>
-    public SolutionsDepot(SecurityDatabase Database, IDisposer<IEntity>? Disposer) : base(Database, Disposer) {
+    public UsersDepot(SecurityDatabase Database, IDisposer<IEntity>? Disposer)
+        : base(Database, Disposer) {
     }
 }

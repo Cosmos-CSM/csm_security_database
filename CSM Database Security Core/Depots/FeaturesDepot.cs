@@ -8,9 +8,9 @@ using CSM_Security_Database_Core.Entities;
 
 namespace CSM_Security_Database_Core.Depots;
 
-/// <inheritdoc cref="ISolutionsDepot"/>
-public class SolutionsDepot
-    : DepotBase<SecurityDatabase, Solution>, ISolutionsDepot {
+/// <inheritdoc cref="IFeaturesDepot"/>
+public class FeaturesDepot
+    : DepotBase<SecurityDatabase, Feature>, IFeaturesDepot {
 
     /// <summary>
     ///     Creates a new instance.
@@ -21,6 +21,7 @@ public class SolutionsDepot
     /// <param name="Disposer">
     ///     Data disposition context manager.
     /// </param>
-    public SolutionsDepot(SecurityDatabase Database, IDisposer<IEntity>? Disposer) : base(Database, Disposer) {
+    public FeaturesDepot(SecurityDatabase Database, IDisposer<IEntity>? Disposer)
+        : base(Database, Disposer) {
     }
 }
