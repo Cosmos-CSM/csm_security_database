@@ -11,13 +11,13 @@ jobs:
     env:
       TEST_PROJECT_PATH: tests/YourProject.IntegrationTests
       DB_CONTEXT_PROJECT_PATH: src/YourProject.Infrastructure
-      SQL_SERVER_PASSWORD: "sa"
+      SQL_SERVER_PASSWORD: "sapassword"
 
     services:
       sqlserver:
-        image: mcr.microsoft.com/mssql/server:2019-latest
+        image: mcr.microsoft.com/azure-sql-edge
         env:
-          SA_PASSWORD: "sa"
+          SA_PASSWORD: "sapassword"
           ACCEPT_EULA: "Y"
         ports:
           - 1433:1433
