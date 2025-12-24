@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CSM Database Security Testing\CSM Security Database Testing.csproj" />
+    <ProjectReference Include="..\CSM Security Database Testing\CSM Security Database Testing.csproj" />
   </ItemGroup>
 
   <ItemGroup>

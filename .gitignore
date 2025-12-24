@@ -46,3 +46,6 @@ Thumbs.db
 
 **/*.runsettings
 **/*.connection.json
+
+
+**/[Bb]uildHost-*/
