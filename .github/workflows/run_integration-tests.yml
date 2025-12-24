@@ -15,7 +15,7 @@ jobs:
 
     services:
       sqlserver:
-        image: mcr.microsoft.com/azure-sql-edge
+        image: mcr.microsoft.com/mssql/server:2019-latest
         env:
           SA_PASSWORD: "sa"
           ACCEPT_EULA: "Y"
