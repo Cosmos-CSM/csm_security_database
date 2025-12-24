@@ -8,45 +8,19 @@ jobs:
   integration-tests:
     runs-on: ubuntu-latest
 
-    env:
-      TEST_PROJECT_PATH: tests/YourProject.IntegrationTests
-      DB_CONTEXT_PROJECT_PATH: src/YourProject.Infrastructure
-      SQL_SERVER_PASSWORD: "P@ssw0rd123!"
-
-    services:
-      sqlserver:
-        image: mcr.microsoft.com/mssql/server:2019-latest
-        env:
-          SA_PASSWORD: "P@ssw0rd123!"
-          ACCEPT_EULA: "Y"
-        ports:
-          - 1433:1433
-        options: >-
-          --health-cmd "sqlcmd -S tcp:localhost,1433 -U sa -P 'P@ssw0rd123!' -Q 'SELECT 1'"
-          --health-interval 5s
-          --health-timeout 3s
-          --health-retries 10
+    container:
+      image: mcr.microsoft.com/mssql/server:2019-latest
+      env:
+        SA_PASSWORD: "P@ssw0rd123!"
+        ACCEPT_EULA: "Y"
+      options: >-
+        --name sql1
+        -p 1433:1433
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 10.0.x
-
       - name: Wait for SQL Server
         run: |
-          echo "Waiting for SQL Server to be ready..."
           for i in {1..30}; do
-            sqlcmd -S tcp:localhost,1433 -U sa -P "${SQL_SERVER_PASSWORD}" -Q "SELECT 1" && break
-            echo "SQL Server not ready yet..."
+            /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "P@ssw0rd123!" -Q "SELECT 1" && break
             sleep 1
           done
-          echo "SQL Server is ready"
-
-      - name: Print SQL Server status
-        run: |
-          echo "Testing SQL Server connection..."
-          sqlcmd -S tcp:localhost,1433 -U sa -P "${SQL_SERVER_PASSWORD}" -Q "SELECT @@VERSION"
