@@ -23,7 +23,7 @@ jobs:
           - 1433:1433
 
     steps:
-      - name: Checkout
+      - name: Checkout Repo
         uses: actions/checkout@v4
 
       - name: Setup .NET
@@ -52,6 +52,14 @@ jobs:
           EOF
           dotnet add createdb package Microsoft.Data.SqlClient >/dev/null
           dotnet run --project createdb
+
+      - name: Authenticate to GitHub Packages
+        run: |
+          dotnet nuget add source \
+            --username "${{ github.actor }}" \
+            --password "${{ secrets.PUBLISH_PAT }}" \
+            --store-password-in-clear-text \
+            --name github "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
 
       - name: Apply EF Core migration
         run: |
