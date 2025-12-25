@@ -70,7 +70,7 @@ jobs:
             "User": "sa",
             "Password": "P@ssw0rd123!",
             "IntegratedSecurity": false,
-            "Trust": true,
+            "Trust": true
           }
           EOF
           
