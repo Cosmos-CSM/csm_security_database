@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      TEST_PROJECT_PATH: tests/YourProject.IntegrationTests
-      DB_CONTEXT_PROJECT_PATH: src/YourProject.Infrastructure
+      TEST_PROJECT_PATH: Integration Tests/
+      DB_CONTEXT_PROJECT_PATH: CSM Security Database Core/
       SQL_SERVER_PASSWORD: "P@ssw0rd123!"
 
     services:
