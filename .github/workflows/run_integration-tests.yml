@@ -59,4 +59,5 @@ jobs:
           export PATH="$PATH:~/.dotnet/tools"
 
           cd "${DB_CONTEXT_PROJECT_PATH}"
+          dotnet restore
           dotnet ef database update
