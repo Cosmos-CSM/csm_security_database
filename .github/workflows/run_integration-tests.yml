@@ -33,9 +33,22 @@ jobs:
 
       - name: Create database "CSM Security"
         run: |
-          docker exec $(docker ps -q --filter "ancestor=mcr.microsoft.com/mssql/server:2019-latest") \
-            /opt/mssql-tools/bin/sqlcmd \
-              -S localhost \
-              -U sa \
-              -P "${SQL_SERVER_PASSWORD}" \
-              -Q "IF DB_ID('CSM Security') IS NULL CREATE DATABASE [CSM Security];"
+          dotnet new console -o createdb >/dev/null 2>&1
+          cat << 'EOF' > createdb/Program.cs
+          using System;
+          using Microsoft.Data.SqlClient;
+
+          class P {
+              static void Main() {
+                  var cs = "Server=localhost,1433;User Id=sa;Password=P@ssw0rd123!;TrustServerCertificate=True";
+                  using var conn = new SqlConnection(cs);
+                  conn.Open();
+                  using var cmd = conn.CreateCommand();
+                  cmd.CommandText = "IF DB_ID('CSM Security') IS NULL CREATE DATABASE [CSM Security]";
+                  cmd.ExecuteNonQuery();
+                  Console.WriteLine("Database created.");
+              }
+          }
+          EOF
+          dotnet add createdb package Microsoft.Data.SqlClient >/dev/null
+          dotnet run --project createdb
