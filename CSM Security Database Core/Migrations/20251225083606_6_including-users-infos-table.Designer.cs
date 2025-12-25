@@ -4,6 +4,7 @@ using CSM_Security_Database_Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CSM_Security.Migrations
 {
     [DbContext(typeof(SecurityDatabase))]
-    partial class DatabaseModelSnapshot : ModelSnapshot
+    [Migration("20251225083606_6_including-users-infos-table")]
+    partial class _6_includingusersinfostable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

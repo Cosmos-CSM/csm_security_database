@@ -14,6 +14,10 @@ namespace Integration_Tests.DepotsTests;
 public class UsersDepotTests
     : TestingDepotBase<User, UsersDepot, SecurityDatabase> {
     protected override User EntityFactory(string Entropy) {
-        return DraftUtils.User();
+        return DraftUtils.User(
+                new User {
+                    UserInfo = Store(DraftUtils.UserInfo())
+                }
+            );
     }
 }
