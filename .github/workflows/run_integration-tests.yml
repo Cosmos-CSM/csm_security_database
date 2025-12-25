@@ -58,5 +58,5 @@ jobs:
           dotnet tool install --global dotnet-ef
           export PATH="$PATH:~/.dotnet/tools"
 
-          dotnet ef database update \
-            --project "${DB_CONTEXT_PROJECT_PATH}"
+          cd "${DB_CONTEXT_PROJECT_PATH}"
+          dotnet ef database update
