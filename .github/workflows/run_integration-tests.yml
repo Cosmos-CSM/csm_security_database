@@ -52,3 +52,11 @@ jobs:
           EOF
           dotnet add createdb package Microsoft.Data.SqlClient >/dev/null
           dotnet run --project createdb
+
+      - name: Apply EF Core migration
+        run: |
+          dotnet tool install --global dotnet-ef
+          export PATH="$PATH:~/.dotnet/tools"
+
+          dotnet ef database update \
+            --project "${DB_CONTEXT_PROJECT_PATH}"
