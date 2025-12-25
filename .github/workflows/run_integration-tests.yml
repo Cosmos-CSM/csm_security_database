@@ -87,3 +87,7 @@ jobs:
           cd "${DB_CONTEXT_PROJECT_PATH}"
           dotnet restore
           dotnet ef database update
+
+      - name: Run integration tests
+        run: |
+          dotnet test "${TEST_PROJECT_PATH}" --logger "trx"
