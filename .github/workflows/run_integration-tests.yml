@@ -76,6 +76,8 @@ jobs:
           
           CONFIG_PATH="$(pwd)/dbconfig.json"
           echo "csms_design_connection=$CONFIG_PATH" >> $GITHUB_ENV
+          echo "Q_CSMS.Connection=$CONFIG_PATH" >> $GITHUB_ENV
+
           echo "Config file created at: $CONFIG_PATH"
           echo "Environment variable csms_design_connection set."
 
@@ -87,3 +89,7 @@ jobs:
           cd "${DB_CONTEXT_PROJECT_PATH}"
           dotnet restore
           dotnet ef database update
+
+      - name: Run integration tests
+        run: |
+          dotnet test "${TEST_PROJECT_PATH}" --logger "trx"
