@@ -57,6 +57,11 @@ public class SecurityDatabase
     public DbSet<Feature> Features { get; set; } = default!;
 
     /// <summary>
+    ///     User Infos DB Set.
+    /// </summary>
+    public DbSet<UserInfo> UserInfos { get; set; } = default!;
+
+    /// <summary>
     ///     Solutions DB Set.
     /// </summary>
     public DbSet<Solution> Solutions { get; set; } = default!;

@@ -46,6 +46,40 @@ static public class DraftUtils {
     }
 
     /// <summary>
+    ///     Drafts an <see cref="CSM_Security_Database_Core.Entities.UserInfo"/> data.
+    /// </summary>
+    /// <param name="ref">
+    ///     Default entity data.
+    /// </param>
+    /// <returns>
+    ///     A drafted <see cref="CSM_Security_Database_Core.Entities.UserInfo"/>.
+    /// </returns>
+    static public UserInfo UserInfo(UserInfo? @ref = null) {
+        @ref = BaseDraftUtils.Entity(@ref);
+
+        if (string.IsNullOrWhiteSpace(@ref.Name)) {
+            @ref.Name = $"Usr_{Epy}";
+        }
+
+        if (string.IsNullOrWhiteSpace(@ref.LastName)) {
+            @ref.LastName = $"{Epy}";
+        }
+
+        if (string.IsNullOrWhiteSpace(@ref.EMail)) {
+            @ref.EMail = $"{Epy}@example.com";
+        }
+
+        if (string.IsNullOrWhiteSpace(@ref.Phone)) {
+            var random = new Random();
+            var phone = random.Next(1000000000, int.MaxValue).ToString()[..10];
+
+            @ref.Phone = phone;
+        }
+
+        return @ref;
+    }
+
+    /// <summary>
     ///     Drafts an <see cref="CSM_Security_Database_Core.Entities.Action"/> data.
     /// </summary>
     /// <param name="ref">

@@ -4,6 +4,7 @@ using CSM_Security_Database_Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CSM_Security.Migrations
 {
     [DbContext(typeof(SecurityDatabase))]
-    partial class DatabaseModelSnapshot : ModelSnapshot
+    [Migration("20251225083606_6_including-users-infos-table")]
+    partial class _6_includingusersinfostable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,36 @@ namespace CSM_Security.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Accounts_Permits", b =>
+                {
+                    b.Property<long>("Account")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("Permit")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Account", "Permit");
+
+                    b.HasIndex("Permit");
+
+                    b.ToTable("Accounts_Permits");
+                });
+
+            modelBuilder.Entity("Accounts_Profiles", b =>
+                {
+                    b.Property<long>("Account")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("Profile")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Account", "Profile");
+
+                    b.HasIndex("Profile");
+
+                    b.ToTable("Accounts_Profiles");
+                });
 
             modelBuilder.Entity("CSM_Security_Database_Core.Entities.Action", b =>
                 {
@@ -175,25 +208,37 @@ namespace CSM_Security.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<bool>("IsEnabled")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Reference")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(8)
+                        .HasColumnType("nchar(8)")
+                        .IsFixedLength();
 
                     b.Property<DateTime>("Timestamp")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2(7)")
+                        .HasDefaultValueSql("GETUTCDATE()");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Profile");
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.HasIndex("Reference")
+                        .IsUnique();
+
+                    b.ToTable("Profiles");
                 });
 
             modelBuilder.Entity("CSM_Security_Database_Core.Entities.Solution", b =>
@@ -251,63 +296,120 @@ namespace CSM_Security.Migrations
                         .HasColumnType("varbinary(max)");
 
                     b.Property<DateTime>("Timestamp")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2(7)")
+                        .HasDefaultValueSql("GETUTCDATE()");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
+                    b.Property<long>("UserInfoShadow")
+                        .HasColumnType("bigint")
+                        .HasColumnName("UserInfo");
+
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.HasIndex("UserInfoShadow")
+                        .IsUnique();
+
+                    b.HasIndex("Username")
+                        .IsUnique();
+
+                    b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("PermitProfile", b =>
+            modelBuilder.Entity("CSM_Security_Database_Core.Entities.UserInfo", b =>
                 {
-                    b.Property<long>("PermitsId")
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    b.Property<long>("ProfilesId")
-                        .HasColumnType("bigint");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.HasKey("PermitsId", "ProfilesId");
+                    b.Property<string>("EMail")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.HasIndex("ProfilesId");
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.ToTable("PermitProfile");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(14)
+                        .HasColumnType("nvarchar(14)");
+
+                    b.Property<DateTime>("Timestamp")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2(7)")
+                        .HasDefaultValueSql("GETUTCDATE()");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EMail")
+                        .IsUnique();
+
+                    b.HasIndex("Phone")
+                        .IsUnique();
+
+                    b.ToTable("UserInfos");
                 });
 
-            modelBuilder.Entity("PermitUser", b =>
+            modelBuilder.Entity("Profiles_Permits", b =>
                 {
-                    b.Property<long>("PermitsId")
+                    b.Property<long>("Permit")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("UsersId")
+                    b.Property<long>("Profile")
                         .HasColumnType("bigint");
 
-                    b.HasKey("PermitsId", "UsersId");
+                    b.HasKey("Permit", "Profile");
 
-                    b.HasIndex("UsersId");
+                    b.HasIndex("Profile");
 
-                    b.ToTable("PermitUser");
+                    b.ToTable("Profiles_Permits");
                 });
 
-            modelBuilder.Entity("ProfileUser", b =>
+            modelBuilder.Entity("Accounts_Permits", b =>
                 {
-                    b.Property<long>("ProfilesId")
-                        .HasColumnType("bigint");
+                    b.HasOne("CSM_Security_Database_Core.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("Account")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<long>("UsersId")
-                        .HasColumnType("bigint");
+                    b.HasOne("CSM_Security_Database_Core.Entities.Permit", null)
+                        .WithMany()
+                        .HasForeignKey("Permit")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
-                    b.HasKey("ProfilesId", "UsersId");
+            modelBuilder.Entity("Accounts_Profiles", b =>
+                {
+                    b.HasOne("CSM_Security_Database_Core.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("Account")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("ProfileUser");
+                    b.HasOne("CSM_Security_Database_Core.Entities.Profile", null)
+                        .WithMany()
+                        .HasForeignKey("Profile")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CSM_Security_Database_Core.Entities.Permit", b =>
@@ -337,47 +439,28 @@ namespace CSM_Security.Migrations
                     b.Navigation("Solution");
                 });
 
-            modelBuilder.Entity("PermitProfile", b =>
+            modelBuilder.Entity("CSM_Security_Database_Core.Entities.User", b =>
+                {
+                    b.HasOne("CSM_Security_Database_Core.Entities.UserInfo", "UserInfo")
+                        .WithOne()
+                        .HasForeignKey("CSM_Security_Database_Core.Entities.User", "UserInfoShadow")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserInfo");
+                });
+
+            modelBuilder.Entity("Profiles_Permits", b =>
                 {
                     b.HasOne("CSM_Security_Database_Core.Entities.Permit", null)
                         .WithMany()
-                        .HasForeignKey("PermitsId")
+                        .HasForeignKey("Permit")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CSM_Security_Database_Core.Entities.Profile", null)
                         .WithMany()
-                        .HasForeignKey("ProfilesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("PermitUser", b =>
-                {
-                    b.HasOne("CSM_Security_Database_Core.Entities.Permit", null)
-                        .WithMany()
-                        .HasForeignKey("PermitsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CSM_Security_Database_Core.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ProfileUser", b =>
-                {
-                    b.HasOne("CSM_Security_Database_Core.Entities.Profile", null)
-                        .WithMany()
-                        .HasForeignKey("ProfilesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CSM_Security_Database_Core.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
+                        .HasForeignKey("Profile")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
