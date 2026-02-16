@@ -25,6 +25,7 @@ public class Profile
     [EntityRelation]
     public ICollection<User> Users { get; set; } = [];
 
+    /// <inheritdoc/>
     protected override void DesignEntity(EntityTypeBuilder etBuilder) {
 
         etBuilder

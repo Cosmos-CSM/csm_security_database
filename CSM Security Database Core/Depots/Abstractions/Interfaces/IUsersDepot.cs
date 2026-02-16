@@ -11,13 +11,13 @@ public interface IUsersDepot
     : IDepot<User> {
 
     /// <summary>
-    ///     Calculates the effective permits from the given <paramref name="id"/> as an <see cref="Account"/>.
+    ///     Calculates the effective permits from the given <paramref name="id"/> as an <see cref="User"/>.
     /// </summary>
     /// <param name="id">
-    ///     <see cref="IEntity.Id"/> pointer identifier for the <see cref="Account"/> to calculate its effective permits.
+    ///     <see cref="CSM_Database_Core.Entities.Abstractions.Interfaces.IEntity.Id"/> pointer identifier for the <see cref="User"/> to calculate its effective permits.
     /// </param>
     /// <returns>
-    ///     Effective <see cref="Permit"/> collection for the given <see cref="Account"/>.
+    ///     Effective <see cref="Permit"/> collection for the given <see cref="User"/>.
     /// </returns>
     Task<Permit[]> GetPermits(long id);
 }

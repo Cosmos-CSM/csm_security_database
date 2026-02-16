@@ -11,7 +11,7 @@ using SecurityEntityBase = CSM_Security_Database_Core.Abstractions.Bases.Securit
 namespace CSM_Security_Database_Core.Entities;
 
 /// <summary>
-///     Represents the possible <see cref="IUser"/> types.
+///     Represents the possible <see cref="User"/> types.
 /// </summary>
 public enum UserTypes {
     /// <summary>
@@ -69,6 +69,7 @@ public class User
     [EntityRelation]
     public ICollection<Profile> Profiles { get; set; } = [];
 
+    /// <inheritdoc/>
     protected override void DesignEntity(EntityTypeBuilder etBuilder) {
         etBuilder.HasIndex(nameof(Username))
             .IsUnique();

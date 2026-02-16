@@ -43,6 +43,7 @@ public class Permit
     [EntityRelation]
     public ICollection<User> Users { get; set; } = [];
 
+    /// <inheritdoc/>
     protected override void DesignEntity(EntityTypeBuilder etBuilder) {
         etBuilder.Link<Permit, Solution>(
                 nameof(Solution),

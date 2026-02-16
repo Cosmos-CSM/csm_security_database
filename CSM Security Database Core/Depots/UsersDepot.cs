@@ -29,6 +29,7 @@ public class UsersDepot
         : base(database, disposer) {
     }
 
+    /// <inheritdoc/>
     public async Task<Permit[]> GetPermits(long id) {
         BatchOperationOutput<User> readOutput = await Read(
                 new QueryInput<User, FilterQueryInput<User>> {

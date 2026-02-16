@@ -9,5 +9,6 @@ namespace CSM_Security_Database_Core.Abstractions.Bases;
 public class SecurityCatalogEntityBase
     : CatalogEntityBase {
 
+    /// <inheritdoc/>
     public override Type Database { get; init; } = typeof(SecurityDatabase);
 }

@@ -27,6 +27,7 @@ public class Solution
     [EntityRelation]
     public ICollection<Permit> Permits { get; set; } = [];
 
+    /// <inheritdoc/>
     protected override void DesignEntity(EntityTypeBuilder etBuilder) {
         etBuilder.Property(nameof(Sign))
             .IsFixedLength()

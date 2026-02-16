@@ -1,5 +1,18 @@
 ﻿# CSM Security Database CHANGELOG
 
+## [2.0.0] - 15.02-2026
+
+### Patch
+
+- Added XML package doc for package consumers.
+
+#### Dependencies
+
+| Package                                 | Previous Version | New Version     |
+|:----------------------------------------|:----------------:|:---------------:|
+| CSM.Database.Core                       | 4.1.2            | 4.2.3           |
+| Microsoft.EntityFrameworkCore.Design	  | 10.0.1           | 10.0.3          |
+
 ## [1.0.1] - 25.12-2025
 
 ### Patch

@@ -30,6 +30,7 @@ public class UserInfo
     /// </summary>
     public string Phone { get; set; } = string.Empty;
 
+    /// <inheritdoc/>
     protected override void DesignEntity(EntityTypeBuilder etBuilder) {
         etBuilder.Property(nameof(Name))
             .HasMaxLength(100)

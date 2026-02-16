@@ -29,9 +29,9 @@ public abstract class TestingSecurityDatabaseDepotBase<TEntity, TDepot>
     ///     Main database factory 
     /// </param>
     /// <param name="databaseFactories">
-    ///     Collateral used databases factories to be used, this are usually needed when the <typeparamref name="TEntity"/> used has dependencies on a different <see cref="IDatabase"/> source than it's own context.
+    ///     Collateral used databases factories to be used, this are usually needed when the <typeparamref name="TEntity"/> used has dependencies on a different <see cref="CSM_Database_Core.Abstractions.Interfaces.IDatabase"/> source than it's own context.
     /// </param>
-    protected TestingSecurityDatabaseDepotBase(DatabaseFactory? databaseFactory = null)
-        : base(databaseFactory) {
+    protected TestingSecurityDatabaseDepotBase(DatabaseFactory? databaseFactory = null, params DatabaseFactory[] databaseFactories)
+        : base(databaseFactory, databaseFactories) {
     }
 }

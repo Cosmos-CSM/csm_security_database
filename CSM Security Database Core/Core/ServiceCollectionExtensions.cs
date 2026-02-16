@@ -8,6 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CSM_Security_Database_Core.Core;
 
+/// <summary>
+///     Provides an extension methods for <see cref="IServiceCollection"/> instances.
+/// </summary>
 public static class ServiceCollectionExtensions {
 
     /// <summary>
