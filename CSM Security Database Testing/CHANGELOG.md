@@ -1,5 +1,18 @@
 ﻿# CSM Security Database Testing CHANGELOG
 
+## [2.0.1] - 10.03-2026
+
+### Patch
+
+- Fixed at [DraftUtils] an error where drafting an [User] it wasn´t drafting its [UserInfo] when there´s no one.
+
+#### Dependencies
+
+| Package                                 | Previous Version | New Version     |
+|:----------------------------------------|:----------------:|:---------------:|
+| CSM.Foundation.Core                     | 3.0.1            | 3.0.1           |
+| CSM.Database.Testing					  | 5.0.0            | 5.0.0           |
+
 ## [2.0.0] - 15.02-2026
 
 ### Patch

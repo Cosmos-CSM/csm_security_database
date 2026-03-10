@@ -33,6 +33,7 @@ static public class DraftUtils {
     /// </returns>
     static public User User(User? @ref = null) {
         @ref = BaseDraftUtils.Entity(@ref);
+        @ref.UserInfo ??= UserInfo();
 
         if (string.IsNullOrWhiteSpace(@ref.Username)) {
             @ref.Username = $"{Epy}_usr";
