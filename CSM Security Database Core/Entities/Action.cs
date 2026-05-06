@@ -13,6 +13,6 @@ public class Action
     /// <summary>
     ///     Permits data.
     /// </summary>
-    [EntityRelation]
+    [EntityDependant]
     public ICollection<Permit> Permits { get; set; } = [];
 }

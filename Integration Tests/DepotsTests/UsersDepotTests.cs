@@ -1,9 +1,7 @@
-﻿using CSM_Database_Testing.Abstractions.Bases;
-
-using CSM_Security_Database_Core;
-using CSM_Security_Database_Core.Depots;
+﻿using CSM_Security_Database_Core.Depots;
 using CSM_Security_Database_Core.Entities;
 
+using CSM_Security_Database_Testing.Abstractions.Bases;
 using CSM_Security_Database_Testing.Utils;
 
 namespace Integration_Tests.DepotsTests;
@@ -12,12 +10,17 @@ namespace Integration_Tests.DepotsTests;
 ///     Integration tests class for <see cref="CSM_Security_Database_Core.Depots.UsersDepot"/>.
 /// </summary>
 public class UsersDepotTests
-    : TestingDepotBase<User, UsersDepot, SecurityDatabase> {
+    : SecurityDepotIntegrationTestsBase<User, UsersDepot> {
+
     protected override User EntityFactory(string Entropy) {
         return DraftUtils.User(
                 new User {
                     UserInfo = Store(DraftUtils.UserInfo())
                 }
             );
+    }
+
+    public override Task Update_Single_Success() {
+        throw new NotImplementedException();
     }
 }

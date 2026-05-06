@@ -16,13 +16,13 @@ public class Profile
     /// <summary>
     ///     Permits data.
     /// </summary>
-    [EntityRelation]
+    [EntityDependency]
     public ICollection<Permit> Permits { get; set; } = [];
 
     /// <summary>
     ///     Users data.
     /// </summary>
-    [EntityRelation]
+    [EntityDependency]
     public ICollection<User> Users { get; set; } = [];
 
     /// <inheritdoc/>

@@ -12,7 +12,7 @@ namespace CSM_Security_Database_Core;
 ///     Represents a [CSM Security] database context.
 /// </summary>
 public class SecurityDatabase
-    : DatabaseBase<SecurityDatabase>, IDatabase {
+    : DatabaseBase<SecurityDatabase> {
 
     /// <summary>
     ///     Database signature

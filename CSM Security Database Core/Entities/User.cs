@@ -54,19 +54,19 @@ public class User
     /// <summary>
     ///     User information data.
     /// </summary>
-    [EntityRelation]
+    [EntityDependency]
     public UserInfo UserInfo { get; set; } = default!;
 
     /// <summary>
     ///     Permits data.
     /// </summary>
-    [EntityRelation]
+    [EntityDependency]
     public ICollection<Permit> Permits { get; set; } = [];
 
     /// <summary>
     ///     Profiles data.
     /// </summary>
-    [EntityRelation]
+    [EntityDependency]
     public ICollection<Profile> Profiles { get; set; } = [];
 
     /// <inheritdoc/>
@@ -82,10 +82,10 @@ public class User
 
         etBuilder.Link<User, UserInfo>(
                 nameof(UserInfo),
-                Required: true,
-                Index: true,
-                Auto: true,
-                Deletion: DeleteBehavior.Cascade
+                isRequired: true,
+                isIndex: true,
+                isAutoLoaded: true,
+                deleteBehavior: DeleteBehavior.Cascade
             );
 
         etBuilder

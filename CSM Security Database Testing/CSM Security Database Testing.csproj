@@ -3,7 +3,7 @@
 		<TargetFramework>net10.0</TargetFramework>
 		<RootNamespace>CSM_Security_Database_Testing</RootNamespace>
 		<PackageId>CSM.Security.Database.Testing</PackageId>
-		<Version>2.0.1</Version>
+		<Version>3.0.0-rc.1</Version>
 		<Authors>Renato Urrea</Authors>
 		<Company>Cosmos (CSM)</Company>
 		<RepositoryUrl>https://github.com/Cosmos-CSM/csm_security_database</RepositoryUrl>
@@ -22,8 +22,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CSM.Database.Testing" Version="5.0.0" />
+		<PackageReference Include="CSM.Database.Testing" Version="6.0.0-rc.3" />
 		<PackageReference Include="CSM.Foundation.Core" Version="3.0.1" />
+		<PackageReference Include="xunit.v3" Version="3.2.2" />
 	</ItemGroup>
 
 	<ItemGroup>
