@@ -17,7 +17,7 @@ public class SecurityDatabase
     /// <summary>
     ///     Database signature
     /// </summary>
-    public override string Sign { get; } = "CSMS";
+    public override string Sign { get; protected set; } = "CSMS";
 
     /// <summary>
     ///     Creates a new instance.

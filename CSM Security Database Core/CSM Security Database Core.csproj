@@ -21,7 +21,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CSM.Database.Core" Version="4.4.0-rc.13" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.5">
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; analyzers; buildtransitive</IncludeAssets>

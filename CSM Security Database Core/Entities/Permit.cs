@@ -16,31 +16,31 @@ public class Permit
     /// <summary>
     ///     Solution data.
     /// </summary>
-    [EntityDependency]
+    [EntityDependency("Solution", typeof(Solution))]
     public Solution Solution { get; set; } = default!;
 
     /// <summary>
     ///     Feature data.
     /// </summary>
-    [EntityDependency]
+    [EntityDependency("Feature", typeof(Feature))]
     public Feature Feature { get; set; } = default!;
 
     /// <summary>
     ///     Action data.
     /// </summary>
-    [EntityDependency]
+    [EntityDependency("Action", typeof(Action))]
     public Action Action { get; set; } = default!;
 
     /// <summary>
     ///     Profiles data.
     /// </summary>
-    [EntityDependency]
+    [EntityDependency("Profile", typeof(Profile), isCollection: true)]
     public ICollection<Profile> Profiles { get; set; } = [];
 
     /// <summary>
     ///     Users data.
     /// </summary>
-    [EntityDependency]
+    [EntityDependency("User", typeof(User), isCollection: true)]
     public ICollection<User> Users { get; set; } = [];
 
     /// <inheritdoc/>
