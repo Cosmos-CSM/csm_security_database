@@ -1,5 +1,12 @@
 ﻿# CSM Security Database CHANGELOG
 
+## [X.X.X] - xx.xx.xxxx
+
+### Patch
+
+- Added Vendor table and tests.
+- old accounts junction tables dropped and replaced by new ones with proper naming.
+
 ## [2.0.0] - 15.02-2026
 
 ### Patch
