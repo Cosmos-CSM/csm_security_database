@@ -21,10 +21,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="CSM.Database.Core" Version="4.4.0" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.5">
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="csms.dev.connection.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
 
 </Project>

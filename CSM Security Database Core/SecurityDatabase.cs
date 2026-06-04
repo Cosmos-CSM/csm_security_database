@@ -70,4 +70,9 @@ public class SecurityDatabase
     ///     Actions DB Set.
     /// </summary>
     public DbSet<Entities.Action> Actions { get; set; } = default!;
+
+    /// <summary>
+    ///     Vendors DB Set.
+    /// </summary>
+    public DbSet<Vendor> Vendors { get; set; } = default!;
 }

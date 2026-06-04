@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
-
+	
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CSM Security Database Core\CSM Security Database Core.csproj" />
     <ProjectReference Include="..\CSM Security Database Testing\CSM Security Database Testing.csproj" />
   </ItemGroup>
 
