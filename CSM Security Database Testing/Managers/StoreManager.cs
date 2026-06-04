@@ -190,6 +190,28 @@ public class StoreManager {
     }
 
     /// <summary>
+    ///     Stores a <see cref="Vendor"/> test object.
+    /// </summary>
+    /// <param name="ref">
+    ///     Data reference.
+    /// </param>
+    /// <returns>
+    ///     A test data stored <see cref="UserInfo"/>.
+    /// </returns>
+    public async Task<Vendor> StoreVendor(Vendor? @ref = null) {
+        Vendor vendor = DraftUtils.Vendor(@ref);
+        List<User> usersToStore = [];
+        foreach (User vendorUser in vendor.Users) {
+            if (vendorUser.Id <= 0)
+                usersToStore.Add(vendorUser);
+        }
+
+        await StoreUsers([.. usersToStore]);
+
+        return _storeManager.Store(vendor);
+    }
+
+    /// <summary>
     ///     Stores a <see cref="CSM_Security_Database_Core.Entities.Action"/> test object.
     /// </summary>
     /// <param name="ref">

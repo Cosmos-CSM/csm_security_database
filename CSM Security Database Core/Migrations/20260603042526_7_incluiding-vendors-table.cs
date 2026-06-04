@@ -73,7 +73,7 @@ namespace CSM_Security.Migrations
                 SELECT Profile, Account FROM Accounts_Profiles;
                 """);
 
-            // --> Now it's safe to drop the old tables.
+            // --> Drop the old tables.
             migrationBuilder.DropTable(
                 name: "Accounts_Permits");
 
@@ -221,7 +221,7 @@ namespace CSM_Security.Migrations
                 SELECT [User], Profile FROM Users_Profiles;
                 """);
 
-            // --> Now it's safe to drop the new tables.
+            // --> Drop the new tables.
             migrationBuilder.DropTable(
                 name: "Users_Permits");
 
