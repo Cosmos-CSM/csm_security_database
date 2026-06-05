@@ -34,13 +34,13 @@ public class Permit
     /// <summary>
     ///     Profiles data.
     /// </summary>
-    [EntityDependency("Profile", typeof(Profile), isCollection: true)]
+    [EntityDependency("Profiles", typeof(Profile), isCollection: true)]
     public ICollection<Profile> Profiles { get; set; } = [];
 
     /// <summary>
     ///     Users data.
     /// </summary>
-    [EntityDependency("User", typeof(User), isCollection: true)]
+    [EntityDependency("Users", typeof(User), isCollection: true)]
     public ICollection<User> Users { get; set; } = [];
 
     /// <inheritdoc/>

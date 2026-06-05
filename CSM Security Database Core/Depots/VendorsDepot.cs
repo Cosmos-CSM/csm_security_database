@@ -8,7 +8,7 @@ using CSM_Security_Database_Core.Entities;
 
 namespace CSM_Security_Database_Core.Depots;
 
-/// <inheritdoc cref="IPermitsDepot"/>
+/// <inheritdoc cref="IVendorsDepot"/>
 public class VendorsDepot
     : DepotBase<SecurityDatabase, Vendor>, IVendorsDepot {
 

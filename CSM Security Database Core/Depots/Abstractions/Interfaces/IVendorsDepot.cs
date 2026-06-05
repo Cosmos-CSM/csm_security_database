@@ -5,7 +5,7 @@ using CSM_Security_Database_Core.Entities;
 namespace CSM_Security_Database_Core.Depots.Abstractions.Interfaces;
 
 /// <summary>
-///     representing a depot to handle <see cref="Vendor"/> dataDatabases entity mirror.
+///     Represents a depot for handling <see cref="Vendor"/> entities.
 /// </summary>
 public interface IVendorsDepot
     : IDepot<Vendor> {

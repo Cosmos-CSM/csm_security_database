@@ -196,7 +196,7 @@ public class StoreManager {
     ///     Data reference.
     /// </param>
     /// <returns>
-    ///     A test data stored <see cref="UserInfo"/>.
+    ///     A test data stored <see cref="Vendor"/>.
     /// </returns>
     public async Task<Vendor> StoreVendor(Vendor? @ref = null) {
         Vendor vendor = DraftUtils.Vendor(@ref);

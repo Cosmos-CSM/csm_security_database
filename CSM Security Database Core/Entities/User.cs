@@ -109,7 +109,7 @@ public class User
             .UsingEntity(
                 Constants.Connectors.UsersProfiles.Connector,
                 con => con.HasOne(typeof(Profile)).WithMany().HasForeignKey(Constants.Connectors.UsersProfiles.Profile).OnDelete(DeleteBehavior.Cascade),
-                con => con.HasOne(typeof(User)).WithMany().HasForeignKey(Constants.Connectors.UsersPermits.User).OnDelete(DeleteBehavior.Cascade)
+                con => con.HasOne(typeof(User)).WithMany().HasForeignKey(Constants.Connectors.UsersProfiles.User).OnDelete(DeleteBehavior.Cascade)
             );
 
         etBuilder

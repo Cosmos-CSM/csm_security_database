@@ -41,7 +41,7 @@ public enum VendorType {
     /// <summary>
     /// 
     /// </summary>
-    Subtenent,
+    Subtenant,
 }
 
 /// <summary>
