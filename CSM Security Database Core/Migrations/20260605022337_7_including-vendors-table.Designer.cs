@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CSM_Security.Migrations
 {
     [DbContext(typeof(SecurityDatabase))]
-    [Migration("20260603042526_7_incluiding-vendors-table")]
-    partial class _7_incluidingvendorstable
+    [Migration("20260605022337_7_including-vendors-table")]
+    partial class _7_includingvendorstable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

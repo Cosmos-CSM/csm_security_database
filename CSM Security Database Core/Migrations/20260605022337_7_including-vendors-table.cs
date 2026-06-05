@@ -6,21 +6,18 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CSM_Security.Migrations
 {
     /// <inheritdoc />
-    public partial class _7_incluidingvendorstable : Migration
+    public partial class _7_includingvendorstable : Migration
     {
         /// <inheritdoc />
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
+        protected override void Up(MigrationBuilder migrationBuilder) {
             // --> Create new tables first to be able to migrate data.
             migrationBuilder.CreateTable(
                 name: "Users_Permits",
-                columns: table => new
-                {
+                columns: table => new {
                     Permit = table.Column<long>(type: "bigint", nullable: false),
                     User = table.Column<long>(type: "bigint", nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Users_Permits", x => new { x.Permit, x.User });
                     table.ForeignKey(
                         name: "FK_Users_Permits_Permits_Permit",
@@ -38,13 +35,11 @@ namespace CSM_Security.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Users_Profiles",
-                columns: table => new
-                {
+                columns: table => new {
                     Profile = table.Column<long>(type: "bigint", nullable: false),
                     User = table.Column<long>(type: "bigint", nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Users_Profiles", x => new { x.Profile, x.User });
                     table.ForeignKey(
                         name: "FK_Users_Profiles_Profiles_Profile",
@@ -82,8 +77,7 @@ namespace CSM_Security.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Vendors",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Type = table.Column<int>(type: "int", nullable: false),
@@ -93,20 +87,17 @@ namespace CSM_Security.Migrations
                     Reference = table.Column<string>(type: "nchar(8)", fixedLength: true, maxLength: 8, nullable: false),
                     IsEnabled = table.Column<bool>(type: "bit", nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Vendors", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Users_Vendors",
-                columns: table => new
-                {
+                columns: table => new {
                     User = table.Column<long>(type: "bigint", nullable: false),
                     Vendor = table.Column<long>(type: "bigint", nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Users_Vendors", x => new { x.User, x.Vendor });
                     table.ForeignKey(
                         name: "FK_Users_Vendors_Users_User",
@@ -151,8 +142,7 @@ namespace CSM_Security.Migrations
         }
 
         /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
+        protected override void Down(MigrationBuilder migrationBuilder) {
             migrationBuilder.DropTable(
                 name: "Users_Vendors");
 
@@ -162,13 +152,11 @@ namespace CSM_Security.Migrations
             // --> Restore old tables before dropping new ones.
             migrationBuilder.CreateTable(
                 name: "Accounts_Permits",
-                columns: table => new
-                {
+                columns: table => new {
                     Account = table.Column<long>(type: "bigint", nullable: false),
                     Permit = table.Column<long>(type: "bigint", nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Accounts_Permits", x => new { x.Account, x.Permit });
                     table.ForeignKey(
                         name: "FK_Accounts_Permits_Permits_Permit",
@@ -186,13 +174,11 @@ namespace CSM_Security.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Accounts_Profiles",
-                columns: table => new
-                {
+                columns: table => new {
                     Account = table.Column<long>(type: "bigint", nullable: false),
                     Profile = table.Column<long>(type: "bigint", nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Accounts_Profiles", x => new { x.Account, x.Profile });
                     table.ForeignKey(
                         name: "FK_Accounts_Profiles_Profiles_Profile",

@@ -64,7 +64,7 @@ public class ProfilesDepotTests
 
         Assert.NotNull(ogProfile);
         Assert.Equal(2, newProfile.Users.Count);
-        Assert.Equal(2, newProfile.Users.Count);
+        Assert.Equal(2, ogProfile.Users.Count);
 
         Assert.Contains(newProfile.Users, newProfileUser => newProfileUser.Id == exUser.Id);
         Assert.Contains(newProfile.Permits, newProfilePermit => newProfilePermit.Id == exPermit.Id);

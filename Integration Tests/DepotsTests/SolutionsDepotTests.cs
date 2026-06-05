@@ -22,11 +22,25 @@ public class SolutionsDepotTests
         //Expectation
         Solution solution = _storeManager.StoreSolution();
 
-        Permit exPermit = _storeManager.StorePermit();
-        string exDescription = "Random description checl";
+        string? oldDescription = solution.Description;
+        string newDescription = "Random description check";
 
         //Acting
-        solution.Description = exDescription;
+        solution.Description = newDescription;
+
+        // Acting
+        solution.Description = newDescription;
+        UpdateOutput<Solution> actOutput = await _depot.Update(
+                new QueryInput<Solution, UpdateInput<Solution>> {
+                    Parameters = new UpdateInput<Solution> {
+                        Entity = solution,
+                    }
+                }
+            );
+        // Asserting
+        Assert.NotNull(actOutput.Original);
+        Assert.Equal(oldDescription, actOutput.Original.Description);
+        Assert.Equal(newDescription, actOutput.Updated.Description);
 
     }
 }
