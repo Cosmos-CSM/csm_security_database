@@ -33,6 +33,7 @@ static public class DraftUtils {
     /// </returns>
     static public User User(User? @ref = null) {
         @ref = BaseDraftUtils.Entity(@ref);
+        @ref.UserInfo ??= UserInfo();
 
         if (string.IsNullOrWhiteSpace(@ref.Username)) {
             @ref.Username = $"{Epy}_usr";
@@ -158,6 +159,22 @@ static public class DraftUtils {
     static public Profile Profile(Profile? @ref = null) {
         @ref = BaseDraftUtils.CatalogEntity(@ref);
 
+        return @ref;
+    }
+
+
+    /// <summary>
+    ///     Drafts a <see cref="CSM_Security_Database_Core.Entities.Vendor"/> data.
+    /// </summary>
+    /// <param name="ref">
+    ///     Default entity data.
+    /// </param>
+    /// <returns>
+    ///     A drafted <see cref="CSM_Security_Database_Core.Entities.Vendor"/>.
+    /// </returns>
+    static public Vendor Vendor(Vendor? @ref = null) {
+        @ref = BaseDraftUtils.CatalogEntity(@ref);
+        @ref.Type = VendorType.Supplier;
         return @ref;
     }
 }

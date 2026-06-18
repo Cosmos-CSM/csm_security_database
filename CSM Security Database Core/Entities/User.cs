@@ -11,7 +11,7 @@ using SecurityEntityBase = CSM_Security_Database_Core.Abstractions.Bases.Securit
 namespace CSM_Security_Database_Core.Entities;
 
 /// <summary>
-///     Represents the possible <see cref="IUser"/> types.
+///     Represents the possible <see cref="User"/> types.
 /// </summary>
 public enum UserTypes {
     /// <summary>
@@ -54,21 +54,28 @@ public class User
     /// <summary>
     ///     User information data.
     /// </summary>
-    [EntityRelation]
+    [EntityDependency("UserInfo", typeof(UserInfo))]
     public UserInfo UserInfo { get; set; } = default!;
 
     /// <summary>
     ///     Permits data.
     /// </summary>
-    [EntityRelation]
+    [EntityDependency("Permits", typeof(Permit), isCollection: true)]
     public ICollection<Permit> Permits { get; set; } = [];
 
     /// <summary>
     ///     Profiles data.
     /// </summary>
-    [EntityRelation]
+    [EntityDependency("Profiles", typeof(Profile), isCollection: true)]
     public ICollection<Profile> Profiles { get; set; } = [];
 
+    /// <summary>
+    /// Collection of <see cref="Vendor"/> linked to this <see cref="User"/>.
+    /// </summary>
+    [EntityDependency("Vendors", typeof(Vendor), isCollection: true)]
+    public ICollection<Vendor> Vendors { get; set; } = [];
+
+    /// <inheritdoc/>
     protected override void DesignEntity(EntityTypeBuilder etBuilder) {
         etBuilder.HasIndex(nameof(Username))
             .IsUnique();
@@ -81,28 +88,37 @@ public class User
 
         etBuilder.Link<User, UserInfo>(
                 nameof(UserInfo),
-                Required: true,
-                Index: true,
-                Auto: true,
-                Deletion: DeleteBehavior.Cascade
+                isRequired: true,
+                isIndex: true,
+                isAutoLoaded: true,
+                deleteBehavior: DeleteBehavior.Cascade
             );
 
         etBuilder
             .HasMany(nameof(Permits))
             .WithMany(nameof(Permit.Users))
             .UsingEntity(
-                Constants.Connectors.AccountsPermits.Connector,
-                con => con.HasOne(typeof(Permit)).WithMany().HasForeignKey(Constants.Connectors.AccountsPermits.Permit).OnDelete(DeleteBehavior.Cascade),
-                con => con.HasOne(typeof(User)).WithMany().HasForeignKey(Constants.Connectors.AccountsPermits.Account).OnDelete(DeleteBehavior.Cascade)
+                Constants.Connectors.UsersPermits.Connector,
+                con => con.HasOne(typeof(Permit)).WithMany().HasForeignKey(Constants.Connectors.UsersPermits.Permit).OnDelete(DeleteBehavior.Cascade),
+                con => con.HasOne(typeof(User)).WithMany().HasForeignKey(Constants.Connectors.UsersPermits.User).OnDelete(DeleteBehavior.Cascade)
             );
 
         etBuilder
             .HasMany(nameof(Profiles))
             .WithMany(nameof(Profile.Users))
             .UsingEntity(
-                Constants.Connectors.AccountsProfiles.Connector,
-                con => con.HasOne(typeof(Profile)).WithMany().HasForeignKey(Constants.Connectors.AccountsProfiles.Profile).OnDelete(DeleteBehavior.Cascade),
-                con => con.HasOne(typeof(User)).WithMany().HasForeignKey(Constants.Connectors.AccountsPermits.Account).OnDelete(DeleteBehavior.Cascade)
+                Constants.Connectors.UsersProfiles.Connector,
+                con => con.HasOne(typeof(Profile)).WithMany().HasForeignKey(Constants.Connectors.UsersProfiles.Profile).OnDelete(DeleteBehavior.Cascade),
+                con => con.HasOne(typeof(User)).WithMany().HasForeignKey(Constants.Connectors.UsersProfiles.User).OnDelete(DeleteBehavior.Cascade)
+            );
+
+        etBuilder
+            .HasMany(nameof(Vendors))
+            .WithMany(nameof(Vendor.Users))
+            .UsingEntity(
+                Constants.Connectors.UsersVendors.Connector,
+                con => con.HasOne(typeof(Vendor)).WithMany().HasForeignKey(Constants.Connectors.UsersVendors.Vendor).OnDelete(DeleteBehavior.Cascade),
+                con => con.HasOne(typeof(User)).WithMany().HasForeignKey(Constants.Connectors.UsersVendors.User).OnDelete(DeleteBehavior.Cascade)
             );
     }
 }

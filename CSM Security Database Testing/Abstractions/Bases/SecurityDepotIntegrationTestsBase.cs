@@ -6,6 +6,8 @@ using CSM_Database_Testing.Disposing.Abstractions.Bases;
 
 using CSM_Security_Database_Core;
 
+using CSM_Security_Database_Testing.Managers;
+
 namespace CSM_Security_Database_Testing.Abstractions.Bases;
 
 /// <summary>
@@ -17,10 +19,15 @@ namespace CSM_Security_Database_Testing.Abstractions.Bases;
 /// <typeparam name="TDepot">
 ///     Type of the <see cref="IDepot{TEntity}"/> being tested.
 /// </typeparam>
-public abstract class TestingSecurityDatabaseDepotBase<TEntity, TDepot>
-    : TestingDepotBase<TEntity, TDepot, SecurityDatabase>
+public abstract class SecurityDepotIntegrationTestsBase<TEntity, TDepot>
+    : DepotIntegrationTestsBase<TEntity, TDepot, SecurityDatabase>
     where TEntity : class, IEntity, new()
     where TDepot : class, IDepot<TEntity> {
+
+    /// <summary>
+    ///     Security testing data store manager.
+    /// </summary>
+    new protected readonly StoreManager _storeManager;
 
     /// <summary>
     ///     Creates a new instance.
@@ -29,9 +36,13 @@ public abstract class TestingSecurityDatabaseDepotBase<TEntity, TDepot>
     ///     Main database factory 
     /// </param>
     /// <param name="databaseFactories">
-    ///     Collateral used databases factories to be used, this are usually needed when the <typeparamref name="TEntity"/> used has dependencies on a different <see cref="IDatabase"/> source than it's own context.
+    ///     Collateral used databases factories to be used, this are usually needed when the <typeparamref name="TEntity"/> used has dependencies on a different <see cref="CSM_Database_Core.Abstractions.Interfaces.IDatabase"/> source than it's own context.
     /// </param>
-    protected TestingSecurityDatabaseDepotBase(DatabaseFactory? databaseFactory = null)
-        : base(databaseFactory) {
+    protected SecurityDepotIntegrationTestsBase(DatabaseFactory? databaseFactory = null, params DatabaseFactory[] databaseFactories)
+        : base(databaseFactory, databaseFactories) {
+
+        _storeManager = new StoreManager(
+                base._storeManager
+            );
     }
 }

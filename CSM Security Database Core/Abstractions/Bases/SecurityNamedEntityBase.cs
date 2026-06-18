@@ -13,6 +13,7 @@ namespace CSM_Security_Database_Core.Abstractions.Bases;
 public abstract class SecurityNamedEntityBase
     : NamedEntityBase {
 
+    /// <inheritdoc/>
     [JsonIgnore]
     public override Type Database { get; init; } = typeof(SecurityDatabase);
 }

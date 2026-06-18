@@ -16,48 +16,49 @@ public class Permit
     /// <summary>
     ///     Solution data.
     /// </summary>
-    [EntityRelation]
+    [EntityDependency("Solution", typeof(Solution))]
     public Solution Solution { get; set; } = default!;
 
     /// <summary>
     ///     Feature data.
     /// </summary>
-    [EntityRelation]
+    [EntityDependency("Feature", typeof(Feature))]
     public Feature Feature { get; set; } = default!;
 
     /// <summary>
     ///     Action data.
     /// </summary>
-    [EntityRelation]
+    [EntityDependency("Action", typeof(Action))]
     public Action Action { get; set; } = default!;
 
     /// <summary>
     ///     Profiles data.
     /// </summary>
-    [EntityRelation]
+    [EntityDependency("Profiles", typeof(Profile), isCollection: true)]
     public ICollection<Profile> Profiles { get; set; } = [];
 
     /// <summary>
     ///     Users data.
     /// </summary>
-    [EntityRelation]
+    [EntityDependency("Users", typeof(User), isCollection: true)]
     public ICollection<User> Users { get; set; } = [];
 
+    /// <inheritdoc/>
     protected override void DesignEntity(EntityTypeBuilder etBuilder) {
         etBuilder.Link<Permit, Solution>(
                 nameof(Solution),
-                Required: true,
-                Auto: true
+                isRequired: true,
+                isAutoLoaded: true
             );
         etBuilder.Link<Permit, Feature>(
                 nameof(Feature),
-                Required: true,
-                Auto: true
+                isRequired: true,
+                isAutoLoaded: true
             );
         etBuilder.Link<Permit, Action>(
                 nameof(Action),
-                Required: true,
-                Auto: true
+                isRequired: true,
+                isAutoLoaded: true
             );
 
         etBuilder.HasIndex("ActionShadow", "SolutionShadow", "FeatureShadow");

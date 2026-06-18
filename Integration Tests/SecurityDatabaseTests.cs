@@ -5,10 +5,10 @@ using CSM_Security_Database_Core;
 namespace Integration_Tests;
 
 /// <summary>
-///     Integration tests class for <see cref="CSM_Security_Database_Core.SecurityDatabase"/>
+///     Integration tests class for <see cref="SecurityDatabase"/>
 /// </summary>
 public class SecurityDatabaseTests
-    : TestingDatabaseBase<SecurityDatabase> {
+    : DatabaseIntegrationTestsBase<SecurityDatabase> {
 
 
     /// <summary>

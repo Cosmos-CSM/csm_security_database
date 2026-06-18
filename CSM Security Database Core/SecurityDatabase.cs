@@ -1,5 +1,4 @@
 ﻿using CSM_Database_Core;
-using CSM_Database_Core.Abstractions.Interfaces;
 using CSM_Database_Core.Core.Models;
 
 using CSM_Security_Database_Core.Entities;
@@ -12,12 +11,12 @@ namespace CSM_Security_Database_Core;
 ///     Represents a [CSM Security] database context.
 /// </summary>
 public class SecurityDatabase
-    : DatabaseBase<SecurityDatabase>, IDatabase {
+    : DatabaseBase<SecurityDatabase> {
 
     /// <summary>
     ///     Database signature
     /// </summary>
-    public override string Sign { get; } = "CSMS";
+    public override string Sign { get; protected set; } = "CSMS";
 
     /// <summary>
     ///     Creates a new instance.
@@ -70,4 +69,9 @@ public class SecurityDatabase
     ///     Actions DB Set.
     /// </summary>
     public DbSet<Entities.Action> Actions { get; set; } = default!;
+
+    /// <summary>
+    ///     Vendors DB Set.
+    /// </summary>
+    public DbSet<Vendor> Vendors { get; set; } = default!;
 }

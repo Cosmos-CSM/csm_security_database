@@ -24,9 +24,10 @@ public class Solution
     /// <summary>
     ///     Permits data.
     /// </summary>
-    [EntityRelation]
+    [EntityDependency("Permits", typeof(Permit), isCollection: true)]
     public ICollection<Permit> Permits { get; set; } = [];
 
+    /// <inheritdoc/>
     protected override void DesignEntity(EntityTypeBuilder etBuilder) {
         etBuilder.Property(nameof(Sign))
             .IsFixedLength()

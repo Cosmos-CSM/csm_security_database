@@ -9,15 +9,15 @@ static class Constants {
         /// <summary>
         /// 
         /// </summary>
-        public struct AccountsPermits {
+        public struct UsersPermits {
             /// <summary>
             /// 
             /// </summary>
-            public const string Connector = "Accounts_Permits";
+            public const string Connector = "Users_Permits";
             /// <summary>
             /// 
             /// </summary>
-            public const string Account = "Account";
+            public const string User = "User";
             /// <summary>
             /// 
             /// </summary>
@@ -27,15 +27,51 @@ static class Constants {
         /// <summary>
         /// 
         /// </summary>
-        public struct AccountsProfiles {
+        public struct UsersProfiles {
             /// <summary>
             /// 
             /// </summary>
-            public const string Connector = "Accounts_Profiles";
+            public const string Connector = "Users_Profiles";
             /// <summary>
             /// 
             /// </summary>
-            public const string Account = "Account";
+            public const string User = "User";
+            /// <summary>
+            /// 
+            /// </summary>
+            public const string Profile = "Profile";
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public struct UsersVendors {
+            /// <summary>
+            /// 
+            /// </summary>
+            public const string Connector = "Users_Vendors";
+            /// <summary>
+            /// 
+            /// </summary>
+            public const string User = "User";
+            /// <summary>
+            /// 
+            /// </summary>
+            public const string Vendor = "Vendor";
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public struct PermitsProfiles {
+            /// <summary>
+            /// 
+            /// </summary>
+            public const string Connector = "Profiles_Permits";
+            /// <summary>
+            /// 
+            /// </summary>
+            public const string Permit = "Permit";
             /// <summary>
             /// 
             /// </summary>

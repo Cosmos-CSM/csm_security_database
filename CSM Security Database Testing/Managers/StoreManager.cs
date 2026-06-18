@@ -1,0 +1,229 @@
+﻿using CSM_Database_Testing.Managers;
+
+using CSM_Security_Database_Core.Entities;
+
+using CSM_Security_Database_Testing.Utils;
+
+namespace CSM_Security_Database_Testing.Managers;
+
+/// <summary>
+///     Represents a test data storing handler for <see cref="CSM_Security_Database_Core.SecurityDatabase"/> entities.
+/// </summary>
+public class StoreManager {
+
+    readonly TestingStoreManager _storeManager;
+
+    /// <summary>
+    ///     Creates a new instance
+    /// </summary>
+    /// <param name="storeManager">
+    ///     Testing data store manager.
+    /// </param>
+    public StoreManager(TestingStoreManager storeManager) {
+        _storeManager = storeManager;
+    }
+
+    /// <summary>
+    ///     Stores a <see cref="Feature"/> test object.
+    /// </summary>
+    /// <param name="ref">
+    ///     Data reference.
+    /// </param>
+    /// <returns>
+    ///     A test data stored <see cref="Feature"/>.
+    /// </returns>
+    public Feature StoreFeature(Feature? @ref = null) {
+        Feature feature = DraftUtils.Feature(@ref);
+
+        return _storeManager.Store(feature);
+    }
+
+    /// <summary>
+    ///     Stores a <see cref="Solution"/> test object.
+    /// </summary>
+    /// <param name="ref">
+    ///     Data reference.
+    /// </param>
+    /// <returns>
+    ///     A test data stored <see cref="Solution"/>.
+    /// </returns>
+    public Solution StoreSolution(Solution? @ref = null) {
+        Solution solution = DraftUtils.Solution(@ref);
+
+        return _storeManager.Store(solution);
+    }
+
+    /// <summary>
+    ///     Stores a <see cref="Permit"/> test object.
+    /// </summary>
+    /// <param name="ref">
+    ///     Data reference.
+    /// </param>
+    /// <returns>
+    ///     A test data stored <see cref="Permit"/>.
+    /// </returns>
+    public Permit StorePermit(Permit? @ref = null) {
+        Permit permit = DraftUtils.Permit(@ref);
+
+        if (permit.Action.Id <= 0)
+            StoreAction(permit.Action);
+
+        if (permit.Feature.Id <= 0)
+            StoreFeature(permit.Feature);
+
+        if (permit.Solution.Id <= 0)
+            StoreSolution(permit.Solution);
+
+
+        return _storeManager.Store(permit);
+    }
+
+    /// <summary>
+    ///     Stores a <see cref="Permit"/> test objects.
+    /// </summary>
+    /// <param name="refs">
+    ///     Data reference.
+    /// </param>
+    /// <returns>
+    ///     A test data stored <see cref="Permit"/> collection.
+    /// </returns>
+    public async Task<Permit[]> StorePermits(params Permit[] @refs) {
+        foreach (Permit @ref in refs) {
+            Permit permit = DraftUtils.Permit(@ref);
+
+            if (permit.Action.Id <= 0)
+                StoreAction(permit.Action);
+
+            if (permit.Feature.Id <= 0)
+                StoreFeature(permit.Feature);
+
+            if (permit.Solution.Id <= 0)
+                StoreSolution(permit.Solution);
+        }
+
+        return await _storeManager.Store(@refs);
+    }
+
+    /// <summary>
+    ///     Stores a <see cref="Profile"/> test object.
+    /// </summary>
+    /// <param name="ref">
+    ///     Data reference.
+    /// </param>
+    /// <returns>
+    ///     A test data stored <see cref="Profile"/>.
+    /// </returns>
+    public async Task<Profile> StoreProfile(Profile? @ref = null) {
+        Profile profile = DraftUtils.Profile(@ref);
+
+        List<Permit> permitsToStore = [];
+        foreach (Permit profilePermit in profile.Permits) {
+            if (profilePermit.Id <= 0)
+                permitsToStore.Add(profilePermit);
+        }
+
+        List<User> usersToStore = [];
+        foreach (User profileUser in profile.Users) {
+            if (profileUser.Id <= 0)
+                usersToStore.Add(profileUser);
+        }
+
+        await StorePermits([.. permitsToStore]);
+        await StoreUsers([.. usersToStore]);
+
+        return _storeManager.Store(profile);
+    }
+
+    /// <summary>
+    ///     Stores a <see cref="User"/> test object.
+    /// </summary>
+    /// <param name="ref">
+    ///     Data reference.
+    /// </param>
+    /// <returns>
+    ///     A test data stored <see cref="User"/>.
+    /// </returns>
+    public User StoreUser(User? @ref = null) {
+        User user = DraftUtils.User(@ref);
+
+        if (user.UserInfo.Id <= 0)
+            StoreUserInfo(user.UserInfo);
+
+        return _storeManager.Store(user);
+    }
+
+    /// <summary>
+    ///     Stores a <see cref="User"/> test objects.
+    /// </summary>
+    /// <param name="refs">
+    ///     Data references.
+    /// </param>
+    /// <returns>
+    ///     A test data stored <see cref="User"/> collection.
+    /// </returns>
+    public async Task<User[]> StoreUsers(params User[] @refs) {
+        foreach (User @ref in @refs) {
+            User user = DraftUtils.User(@ref);
+
+            if (user.UserInfo?.Id <= 0)
+                StoreUserInfo(user.UserInfo);
+
+
+        }
+
+        return await _storeManager.Store(@refs);
+    }
+
+    /// <summary>
+    ///     Stores a <see cref="UserInfo"/> test object.
+    /// </summary>
+    /// <param name="ref">
+    ///     Data reference.
+    /// </param>
+    /// <returns>
+    ///     A test data stored <see cref="UserInfo"/>.
+    /// </returns>
+    public UserInfo StoreUserInfo(UserInfo? @ref = null) {
+        UserInfo userInfo = DraftUtils.UserInfo(@ref);
+
+        return _storeManager.Store(userInfo);
+    }
+
+    /// <summary>
+    ///     Stores a <see cref="Vendor"/> test object.
+    /// </summary>
+    /// <param name="ref">
+    ///     Data reference.
+    /// </param>
+    /// <returns>
+    ///     A test data stored <see cref="Vendor"/>.
+    /// </returns>
+    public async Task<Vendor> StoreVendor(Vendor? @ref = null) {
+        Vendor vendor = DraftUtils.Vendor(@ref);
+        List<User> usersToStore = [];
+        foreach (User vendorUser in vendor.Users) {
+            if (vendorUser.Id <= 0)
+                usersToStore.Add(vendorUser);
+        }
+
+        await StoreUsers([.. usersToStore]);
+
+        return _storeManager.Store(vendor);
+    }
+
+    /// <summary>
+    ///     Stores a <see cref="CSM_Security_Database_Core.Entities.Action"/> test object.
+    /// </summary>
+    /// <param name="ref">
+    ///     Data reference.
+    /// </param>
+    /// <returns>
+    ///     A test data stored <see cref="CSM_Security_Database_Core.Entities.Action"/>.
+    /// </returns>
+    public CSM_Security_Database_Core.Entities.Action StoreAction(CSM_Security_Database_Core.Entities.Action? @ref = null) {
+        CSM_Security_Database_Core.Entities.Action action = DraftUtils.Action(@ref);
+
+
+        return _storeManager.Store(action);
+    }
+}
