@@ -54,20 +54,26 @@ public class User
     /// <summary>
     ///     User information data.
     /// </summary>
-    [EntityDependency]
+    [EntityRelation]
     public UserInfo UserInfo { get; set; } = default!;
 
     /// <summary>
     ///     Permits data.
     /// </summary>
-    [EntityDependency]
+    [EntityRelation]
     public ICollection<Permit> Permits { get; set; } = [];
 
     /// <summary>
     ///     Profiles data.
     /// </summary>
-    [EntityDependency]
+    [EntityRelation]
     public ICollection<Profile> Profiles { get; set; } = [];
+
+    /// <summary>
+    /// Collection of <see cref="Vendor"/> linked to this <see cref="User"/>.
+    /// </summary>
+    [EntityRelation]
+    public ICollection<Vendor> Vendors { get; set; } = [];
 
     /// <inheritdoc/>
     protected override void DesignEntity(EntityTypeBuilder etBuilder) {
@@ -92,18 +98,27 @@ public class User
             .HasMany(nameof(Permits))
             .WithMany(nameof(Permit.Users))
             .UsingEntity(
-                Constants.Connectors.AccountsPermits.Connector,
-                con => con.HasOne(typeof(Permit)).WithMany().HasForeignKey(Constants.Connectors.AccountsPermits.Permit).OnDelete(DeleteBehavior.Cascade),
-                con => con.HasOne(typeof(User)).WithMany().HasForeignKey(Constants.Connectors.AccountsPermits.Account).OnDelete(DeleteBehavior.Cascade)
+                Constants.Connectors.UsersPermits.Connector,
+                con => con.HasOne(typeof(Permit)).WithMany().HasForeignKey(Constants.Connectors.UsersPermits.Permit).OnDelete(DeleteBehavior.Cascade),
+                con => con.HasOne(typeof(User)).WithMany().HasForeignKey(Constants.Connectors.UsersPermits.User).OnDelete(DeleteBehavior.Cascade)
             );
 
         etBuilder
             .HasMany(nameof(Profiles))
             .WithMany(nameof(Profile.Users))
             .UsingEntity(
-                Constants.Connectors.AccountsProfiles.Connector,
-                con => con.HasOne(typeof(Profile)).WithMany().HasForeignKey(Constants.Connectors.AccountsProfiles.Profile).OnDelete(DeleteBehavior.Cascade),
-                con => con.HasOne(typeof(User)).WithMany().HasForeignKey(Constants.Connectors.AccountsPermits.Account).OnDelete(DeleteBehavior.Cascade)
+                Constants.Connectors.UsersProfiles.Connector,
+                con => con.HasOne(typeof(Profile)).WithMany().HasForeignKey(Constants.Connectors.UsersProfiles.Profile).OnDelete(DeleteBehavior.Cascade),
+                con => con.HasOne(typeof(User)).WithMany().HasForeignKey(Constants.Connectors.UsersProfiles.User).OnDelete(DeleteBehavior.Cascade)
+            );
+
+        etBuilder
+            .HasMany(nameof(Vendors))
+            .WithMany(nameof(Vendor.Users))
+            .UsingEntity(
+                Constants.Connectors.UsersVendors.Connector,
+                con => con.HasOne(typeof(Vendor)).WithMany().HasForeignKey(Constants.Connectors.UsersVendors.Vendor).OnDelete(DeleteBehavior.Cascade),
+                con => con.HasOne(typeof(User)).WithMany().HasForeignKey(Constants.Connectors.UsersVendors.User).OnDelete(DeleteBehavior.Cascade)
             );
     }
 }

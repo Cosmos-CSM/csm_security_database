@@ -43,6 +43,7 @@ public static class ServiceCollectionExtensions {
         services.AddScoped<IFeaturesDepot, FeaturesDepot>();
         services.AddScoped<ISolutionsDepot, SolutionsDepot>();
         services.AddScoped<IUserInfosDepot, UserInfosDepot>();
+        services.AddScoped<IVendorsDepot, VendorsDepot>();
 
         return services;
     }

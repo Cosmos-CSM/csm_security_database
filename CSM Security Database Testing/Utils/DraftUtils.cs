@@ -161,4 +161,20 @@ static public class DraftUtils {
 
         return @ref;
     }
+
+
+    /// <summary>
+    ///     Drafts a <see cref="CSM_Security_Database_Core.Entities.Vendor"/> data.
+    /// </summary>
+    /// <param name="ref">
+    ///     Default entity data.
+    /// </param>
+    /// <returns>
+    ///     A drafted <see cref="CSM_Security_Database_Core.Entities.Vendor"/>.
+    /// </returns>
+    static public Vendor Vendor(Vendor? @ref = null) {
+        @ref = BaseDraftUtils.CatalogEntity(@ref);
+        @ref.Type = VendorType.Supplier;
+        return @ref;
+    }
 }

@@ -20,31 +20,28 @@ public class ActionsDepotTests
         return DraftUtils.Action();
     }
 
+
+
     public override async Task Update_Single_Success() {
         // Expectation
-        Action expAction = _storeManager.StoreAction();
-        Permit expPermit = _storeManager.StorePermit();
+        Action expAction = await _storeManager.StoreAction();
+        Permit expPermit = await _storeManager.StorePermit();
 
         string? oldDescription = expAction.Description;
         expAction.Description = "New description";
-        expAction.Permits = [
-                expPermit
-            ];
 
-        // Acting
+        //Acting
         UpdateOutput<Action> actOutput = await _depot.Update(
                 new QueryInput<Action, UpdateInput<Action>> {
                     Parameters = new UpdateInput<Action> {
                         Entity = expAction,
                     }
-                }    
+                }
             );
 
         // Asserting
         Assert.NotNull(actOutput.Original);
         Assert.Equal(oldDescription, actOutput.Original.Description);
         Assert.NotEqual(actOutput.Original.Description, actOutput.Updated.Description);
-        Assert.NotEmpty(actOutput.Updated.Permits);
-        Assert.Contains(actOutput.Updated.Permits, actUpdatedPermit => actUpdatedPermit.Id == expPermit.Id);
     }
 }

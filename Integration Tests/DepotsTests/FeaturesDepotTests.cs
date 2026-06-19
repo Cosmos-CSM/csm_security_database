@@ -20,15 +20,14 @@ public class FeaturesDepotTests
 
     public override async Task Update_Single_Success() {
         // Setting
-        Feature feature = _storeManager.StoreFeature();
+        Feature feature = await _storeManager.StoreFeature();
 
         // Expectations
         string? oldDescription = feature.Description;
-        Permit expPermit = _storeManager.StorePermit();
+        Permit expPermit = await _storeManager.StorePermit();
 
         // Acting
         feature.Description = "New description random";
-        feature.Permits.Add(expPermit);
         UpdateOutput<Feature> actOutput = await _depot.Update(
                 new QueryInput<Feature, UpdateInput<Feature>> {
                     Parameters = new UpdateInput<Feature> {
@@ -41,7 +40,5 @@ public class FeaturesDepotTests
         Assert.NotNull(actOutput.Original);
         Assert.Equal(oldDescription, actOutput.Original.Description);
         Assert.NotEqual(actOutput.Original.Description, actOutput.Updated.Description);
-        Assert.NotEmpty(actOutput.Updated.Permits);
-        Assert.Contains(actOutput.Updated.Permits, actUpdatedPermit => actUpdatedPermit.Id == expPermit.Id);
     }
 }

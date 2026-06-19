@@ -32,10 +32,10 @@ public class StoreManager {
     /// <returns>
     ///     A test data stored <see cref="Feature"/>.
     /// </returns>
-    public Feature StoreFeature(Feature? @ref = null) {
+    public async Task<Feature> StoreFeature(Feature? @ref = null) {
         Feature feature = DraftUtils.Feature(@ref);
 
-        return _storeManager.Store(feature);
+        return await _storeManager.Store(feature);
     }
 
     /// <summary>
@@ -47,10 +47,10 @@ public class StoreManager {
     /// <returns>
     ///     A test data stored <see cref="Solution"/>.
     /// </returns>
-    public Solution StoreSolution(Solution? @ref = null) {
+    public async Task<Solution> StoreSolution(Solution? @ref = null) {
         Solution solution = DraftUtils.Solution(@ref);
 
-        return _storeManager.Store(solution);
+        return await _storeManager.Store(solution);
     }
 
     /// <summary>
@@ -62,20 +62,20 @@ public class StoreManager {
     /// <returns>
     ///     A test data stored <see cref="Permit"/>.
     /// </returns>
-    public Permit StorePermit(Permit? @ref = null) {
+    public async Task<Permit> StorePermit(Permit? @ref = null) {
         Permit permit = DraftUtils.Permit(@ref);
 
         if (permit.Action.Id <= 0)
-            StoreAction(permit.Action);
+            await StoreAction(permit.Action);
 
         if (permit.Feature.Id <= 0)
-            StoreFeature(permit.Feature);
+            await StoreFeature(permit.Feature);
 
         if (permit.Solution.Id <= 0)
-            StoreSolution(permit.Solution);
+            await StoreSolution(permit.Solution);
 
 
-        return _storeManager.Store(permit);
+        return await _storeManager.Store(permit);
     }
 
     /// <summary>
@@ -92,13 +92,13 @@ public class StoreManager {
             Permit permit = DraftUtils.Permit(@ref);
 
             if (permit.Action.Id <= 0)
-                StoreAction(permit.Action);
+                await StoreAction(permit.Action);
 
             if (permit.Feature.Id <= 0)
-                StoreFeature(permit.Feature);
+                await StoreFeature(permit.Feature);
 
             if (permit.Solution.Id <= 0)
-                StoreSolution(permit.Solution);
+                await StoreSolution(permit.Solution);
         }
 
         return await _storeManager.Store(@refs);
@@ -131,7 +131,7 @@ public class StoreManager {
         await StorePermits([.. permitsToStore]);
         await StoreUsers([.. usersToStore]);
 
-        return _storeManager.Store(profile);
+        return await _storeManager.Store(profile);
     }
 
     /// <summary>
@@ -143,13 +143,13 @@ public class StoreManager {
     /// <returns>
     ///     A test data stored <see cref="User"/>.
     /// </returns>
-    public User StoreUser(User? @ref = null) {
+    public async Task<User> StoreUser(User? @ref = null) {
         User user = DraftUtils.User(@ref);
 
         if (user.UserInfo.Id <= 0)
-            StoreUserInfo(user.UserInfo);
+            await StoreUserInfo(user.UserInfo);
 
-        return _storeManager.Store(user);
+        return await _storeManager.Store(user);
     }
 
     /// <summary>
@@ -166,7 +166,7 @@ public class StoreManager {
             User user = DraftUtils.User(@ref);
 
             if (user.UserInfo?.Id <= 0)
-                StoreUserInfo(user.UserInfo);
+                await StoreUserInfo(user.UserInfo);
 
 
         }
@@ -183,10 +183,32 @@ public class StoreManager {
     /// <returns>
     ///     A test data stored <see cref="UserInfo"/>.
     /// </returns>
-    public UserInfo StoreUserInfo(UserInfo? @ref = null) {
+    public async Task<UserInfo> StoreUserInfo(UserInfo? @ref = null) {
         UserInfo userInfo = DraftUtils.UserInfo(@ref);
 
-        return _storeManager.Store(userInfo);
+        return await _storeManager.Store(userInfo);
+    }
+
+    /// <summary>
+    ///     Stores a <see cref="Vendor"/> test object.
+    /// </summary>
+    /// <param name="ref">
+    ///     Data reference.
+    /// </param>
+    /// <returns>
+    ///     A test data stored <see cref="Vendor"/>.
+    /// </returns>
+    public async Task<Vendor> StoreVendor(Vendor? @ref = null) {
+        Vendor vendor = DraftUtils.Vendor(@ref);
+        List<User> usersToStore = [];
+        foreach (User vendorUser in vendor.Users) {
+            if (vendorUser.Id <= 0)
+                usersToStore.Add(vendorUser);
+        }
+
+        await StoreUsers([.. usersToStore]);
+
+        return await _storeManager.Store(vendor);
     }
 
     /// <summary>
@@ -198,10 +220,10 @@ public class StoreManager {
     /// <returns>
     ///     A test data stored <see cref="CSM_Security_Database_Core.Entities.Action"/>.
     /// </returns>
-    public CSM_Security_Database_Core.Entities.Action StoreAction(CSM_Security_Database_Core.Entities.Action? @ref = null) {
+    public async Task<CSM_Security_Database_Core.Entities.Action> StoreAction(CSM_Security_Database_Core.Entities.Action? @ref = null) {
         CSM_Security_Database_Core.Entities.Action action = DraftUtils.Action(@ref);
 
 
-        return _storeManager.Store(action);
+        return await _storeManager.Store(action);
     }
 }

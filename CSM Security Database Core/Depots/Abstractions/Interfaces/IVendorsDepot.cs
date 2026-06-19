@@ -5,8 +5,8 @@ using CSM_Security_Database_Core.Entities;
 namespace CSM_Security_Database_Core.Depots.Abstractions.Interfaces;
 
 /// <summary>
-///     Represents an entities depot provider for <see cref="UserInfo"/>.
+///     Represents a depot for handling <see cref="Vendor"/> entities.
 /// </summary>
-public interface IUserInfosDepot
-    : IDepot<UserInfo> {
+public interface IVendorsDepot
+    : IDepot<Vendor> {
 }

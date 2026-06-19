@@ -24,7 +24,7 @@ public class Solution
     /// <summary>
     ///     Permits data.
     /// </summary>
-    [EntityDependant]
+    [EntityRelation]
     public ICollection<Permit> Permits { get; set; } = [];
 
     /// <inheritdoc/>

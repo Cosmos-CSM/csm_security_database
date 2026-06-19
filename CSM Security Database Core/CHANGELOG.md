@@ -1,5 +1,24 @@
 ﻿# CSM Security Database CHANGELOG
 
+## [3.0.0] - 19.06.2026
+
+### Patch
+
+- Added Vendor feature and tests.
+
+- Old accounts junction tables dropped and replaced by new ones with proper naming.
+
+### Fixes
+
+- [Updates] operations fixed for complex relations. 
+
+#### Dependencies
+
+| Package                                 | Previous Version | New Version     |
+|:----------------------------------------|:----------------:|:---------------:|
+| CSM.Database.Core                       | 4.2.3            | 6.0.6           |
+| Microsoft.EntityFrameworkCore.Design	  | 10.0.3           | 10.0.9          |
+
 ## [2.0.0] - 15.02-2026
 
 ### Patch

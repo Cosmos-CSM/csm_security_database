@@ -52,7 +52,7 @@ public class UsersDepot
         if (readOutput.SuccessesCount <= 0)
             throw new DepotError<User>(DepotErrorEvents.UNFOUND);
 
-        User User = readOutput.Successes[0];
+        User user = readOutput.Successes[0];
 
         List<Permit> effectivePermits = [];
 
@@ -65,7 +65,7 @@ public class UsersDepot
         }
 
 
-        foreach (Profile profile in User.Profiles) {
+        foreach (Profile profile in user.Profiles) {
             foreach (Permit profilePermit in profile.Permits) {
                 if (!VerifyEffective(profilePermit))
                     continue;
@@ -74,7 +74,7 @@ public class UsersDepot
             }
         }
 
-        foreach (Permit permit in User.Permits) {
+        foreach (Permit permit in user.Permits) {
             if (!VerifyEffective(permit))
                 continue;
 
