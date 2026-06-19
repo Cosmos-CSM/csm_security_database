@@ -16,20 +16,20 @@ public class PermitsDepotTests
     protected override Permit EntityFactory(string Entropy) {
         return DraftUtils.Permit(
                 new Permit {
-                    Action = Store(DraftUtils.Action()),
-                    Feature = Store(DraftUtils.Feature()),
-                    Solution = Store(DraftUtils.Solution()),
+                    Action = Store(DraftUtils.Action()).GetAwaiter().GetResult(),
+                    Feature = Store(DraftUtils.Feature()).GetAwaiter().GetResult(),
+                    Solution = Store(DraftUtils.Solution()).GetAwaiter().GetResult(),
                 }
             );
     }
 
     public override async Task Update_Single_Success() {
         // Expectation
-        Feature exFeature = _storeManager.StoreFeature();
-        Solution exSolution = _storeManager.StoreSolution();
-        CSM_Security_Database_Core.Entities.Action exAction = _storeManager.StoreAction();
+        Feature exFeature = await _storeManager.StoreFeature();
+        Solution exSolution = await _storeManager.StoreSolution();
+        CSM_Security_Database_Core.Entities.Action exAction = await _storeManager.StoreAction();
 
-        Permit permit = _storeManager.StorePermit();
+        Permit permit = await _storeManager.StorePermit();
 
         permit.Action = exAction;
         permit.Feature = exFeature;

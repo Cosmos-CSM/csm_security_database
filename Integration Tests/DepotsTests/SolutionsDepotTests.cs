@@ -20,7 +20,7 @@ public class SolutionsDepotTests
 
     public override async Task Update_Single_Success() {
         //Expectation
-        Solution solution = _storeManager.StoreSolution();
+        Solution solution = await _storeManager.StoreSolution();
 
         string? oldDescription = solution.Description;
         string newDescription = "Random description check";

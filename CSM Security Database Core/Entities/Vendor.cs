@@ -62,7 +62,7 @@ public class Vendor : SecurityCatalogEntityBase {
     /// <summary>
     ///    Collection of <see cref="User"/> linked to this <see cref="Vendor"/>.
     /// </summary> 
-    [EntityDependency("Users", typeof(User), isCollection: true)]
+    [EntityRelation]
     public ICollection<User> Users { get; set; } = [];
 
     #endregion

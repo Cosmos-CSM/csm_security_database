@@ -6,6 +6,8 @@ using CSM_Security_Database_Core.Entities;
 using CSM_Security_Database_Testing.Abstractions.Bases;
 using CSM_Security_Database_Testing.Utils;
 
+using Microsoft.EntityFrameworkCore;
+
 namespace Integration_Tests.DepotsTests;
 
 /// <summary>
@@ -23,19 +25,34 @@ public class VendorsDepotTests
         Vendor vendor = await _storeManager.StoreVendor(
                 new Vendor {
                     Users = [
-                        DraftUtils.User()
+                            DraftUtils.User()
                         ]
                 }
             );
 
-        User exUser = _storeManager.StoreUser();
-        vendor.Users.Add(exUser);
+        User exUser = await _storeManager.StoreUser();
 
         // Acting 
         UpdateOutput<Vendor> actOutput = await _depot.Update(
                 new QueryInput<Vendor, UpdateInput<Vendor>> {
                     Parameters = new UpdateInput<Vendor> {
                         Entity = vendor,
+                        Relations = new Dictionary<string, CSM_Database_Core.Depots.Models.Structs.RelationUpdate[]> {
+                            {
+                                nameof(Vendor.Users),
+                                [
+                                        new CSM_Database_Core.Depots.Models.Structs.RelationUpdate{
+                                                Action = CSM_Database_Core.Depots.Models.Structs.RelationUpdateAction.ADD,
+                                                Entity = exUser
+                                            }
+                                    ]
+                            }
+                        },
+                    },
+                    PostProcessor = (query) => {
+                        return query.Include(
+                                obj => obj.Users
+                            );
                     }
                 }
             );
@@ -45,7 +62,7 @@ public class VendorsDepotTests
         Vendor newVendor = actOutput.Updated;
 
         Assert.NotNull(ogVendor);
-        Assert.Equal(2, ogVendor.Users.Count);
+        Assert.Single(ogVendor.Users);
         Assert.Equal(2, newVendor.Users.Count);
 
         Assert.Contains(newVendor.Users, newVendorUser => newVendorUser.Id == exUser.Id);

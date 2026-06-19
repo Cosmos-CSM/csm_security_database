@@ -4,7 +4,7 @@
 		<TargetFramework>net10.0</TargetFramework>
 		<RootNamespace>CSM_Security_Database_Core</RootNamespace>
 		<PackageId>CSM.Security.Database.Core</PackageId>
-		<Version>3.0.0-rc.1</Version>
+		<Version>3.0.0</Version>
 		<Authors>Renato Urrea</Authors>
 		<Company>Cosmos (CSM)</Company>
 		<RepositoryUrl>https://github.com/Cosmos-CSM/csm_security_database</RepositoryUrl>
@@ -21,18 +21,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CSM.Database.Core" Version="4.4.0" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.5">
+	  <PackageReference Include="CSM.Database.Core" Version="6.0.6" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.9">
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
 	</ItemGroup>
 	
 	<ItemGroup>
-		<None Include="csms.dev.connection.json"
-	  Condition="Exists('csms.dev.connection.json')"
-	  CopyToOutputDirectory="PreserveNewest"
-	  Pack="false" />
+		<None Include="csms.dev.connection.json" Condition="Exists('csms.dev.connection.json')" CopyToOutputDirectory="PreserveNewest" Pack="false" />
 	</ItemGroup>
 
 </Project>

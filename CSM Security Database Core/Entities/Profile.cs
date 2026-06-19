@@ -17,13 +17,13 @@ public class Profile
     /// <summary>
     ///     Permits data.
     /// </summary>
-    [EntityDependency("Permits", typeof(Permit), isCollection: true)]
+    [EntityRelation]
     public ICollection<Permit> Permits { get; set; } = [];
 
     /// <summary>
     ///     Users data.
     /// </summary>
-    [EntityDependency("Users", typeof(User), isCollection: true)]
+    [EntityRelation]
     public ICollection<User> Users { get; set; } = [];
 
     /// <inheritdoc/>

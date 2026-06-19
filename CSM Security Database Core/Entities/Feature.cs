@@ -13,6 +13,6 @@ public class Feature
     /// <summary>
     ///     Permits data.
     /// </summary>
-    [EntityDependency("Permits", typeof(Permit), isCollection: true)]
+    [EntityRelation]
     public ICollection<Permit> Permits { get; set; } = [];
 }

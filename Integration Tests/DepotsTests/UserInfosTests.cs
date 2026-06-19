@@ -20,7 +20,7 @@ public class UserInfosTests
 
     public override async Task Update_Single_Success() {
         // Setting
-        UserInfo userInfo = _storeManager.StoreUserInfo();
+        UserInfo userInfo = await _storeManager.StoreUserInfo();
         // Expectations
         string oldName = userInfo.Name;
         string newName = $"{oldName}_upd";

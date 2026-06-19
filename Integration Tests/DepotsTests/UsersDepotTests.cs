@@ -17,18 +17,20 @@ public class UsersDepotTests
     protected override User EntityFactory(string Entropy) {
         return DraftUtils.User(
                 new User {
-                    UserInfo = Store(DraftUtils.UserInfo())
+                    UserInfo = Store(DraftUtils.UserInfo()).GetAwaiter().GetResult(),
                 }
             );
     }
 
     public override async Task Update_Single_Success() {
-        // Setting
-        User user = _storeManager.StoreUser();
-        // Expectations
+        //Preparing
+        User user = await _storeManager.StoreUser();
+        
+        //Expectations
         string oldUsername = user.Username;
         string newUsername = $"{oldUsername}_upd";
-        // Acting
+        
+        //Acting
         user.Username = newUsername;
         UpdateOutput<User> actOutput = await _depot.Update(
                 new QueryInput<User, UpdateInput<User>> {
@@ -37,7 +39,8 @@ public class UsersDepotTests
                     }
                 }
             );
-        // Asserting
+
+        //Asserting
         Assert.NotNull(actOutput.Original);
         Assert.Equal(oldUsername, actOutput.Original.Username);
         Assert.Equal(newUsername, actOutput.Updated.Username);

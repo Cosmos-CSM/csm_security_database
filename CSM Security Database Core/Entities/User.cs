@@ -54,25 +54,25 @@ public class User
     /// <summary>
     ///     User information data.
     /// </summary>
-    [EntityDependency("UserInfo", typeof(UserInfo))]
+    [EntityRelation]
     public UserInfo UserInfo { get; set; } = default!;
 
     /// <summary>
     ///     Permits data.
     /// </summary>
-    [EntityDependency("Permits", typeof(Permit), isCollection: true)]
+    [EntityRelation]
     public ICollection<Permit> Permits { get; set; } = [];
 
     /// <summary>
     ///     Profiles data.
     /// </summary>
-    [EntityDependency("Profiles", typeof(Profile), isCollection: true)]
+    [EntityRelation]
     public ICollection<Profile> Profiles { get; set; } = [];
 
     /// <summary>
     /// Collection of <see cref="Vendor"/> linked to this <see cref="User"/>.
     /// </summary>
-    [EntityDependency("Vendors", typeof(Vendor), isCollection: true)]
+    [EntityRelation]
     public ICollection<Vendor> Vendors { get; set; } = [];
 
     /// <inheritdoc/>
