@@ -1,5 +1,18 @@
 ﻿# CSM Security Database CHANGELOG
 
+## [3.1.0] - 24.06.2026
+
+### Patch
+
+- Updated [CSM.Database.Core] to impact version.
+
+#### Dependencies
+
+| Package                                 | Previous Version | New Version     |
+|:----------------------------------------|:----------------:|:---------------:|
+| CSM.Database.Core                       | 6.0.6            | 6.1.0           |
+| Microsoft.EntityFrameworkCore.Design	  | 10.0.9           | 10.0.9          |
+
 ## [3.0.0] - 19.06.2026
 
 ### Patch
