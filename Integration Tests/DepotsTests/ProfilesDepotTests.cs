@@ -55,24 +55,34 @@ public class ProfilesDepotTests
                 new QueryInput<Profile, UpdateInput<Profile>> {
                     Parameters = new UpdateInput<Profile> {
                         Entity = profile,
-                        Relations = new Dictionary<string, RelationUpdate[]> {
+                        Relations = new Dictionary<string, IDictionary<string, RelationUpdate[]>> {
                             {
                                 nameof(Profile.Users),
-                                [
-                                        new RelationUpdate {
+                                new Dictionary<string, RelationUpdate[]> {
+                                    {
+                                        string.Empty,
+                                        [
+                                            new RelationUpdate {
                                                 Action = RelationUpdateAction.ADD,
                                                 Entity = exUser
                                             }
-                                    ]
+                                        ]
+                                    }
+                                }
                             },
                             {
                                 nameof(Profile.Permits),
-                                [
-                                        new RelationUpdate {
+                                new Dictionary<string, RelationUpdate[]> {
+                                    {
+                                        string.Empty,
+                                        [
+                                            new RelationUpdate {
                                                 Action = RelationUpdateAction.ADD,
                                                 Entity = exPermit
                                             }
-                                    ]
+                                        ]
+                                    }
+                                }
                             }
                         },
                     },

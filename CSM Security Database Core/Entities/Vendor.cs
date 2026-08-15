@@ -47,7 +47,7 @@ public enum VendorType {
 /// <summary>
 /// Represents a vendor entity in the security database, which can be an owner, supplier, contractor, etc. Each vendor can have multiple users associated with it.
 /// </summary>
-public class Vendor : SecurityCatalogEntityBase {
+public class Vendor : SecurityNamedEntityBase {
 
     #region Properties
     /// <summary>
@@ -69,6 +69,8 @@ public class Vendor : SecurityCatalogEntityBase {
 
     /// <inheritdoc/>
     protected override void DesignEntity(EntityTypeBuilder etBuilder) {
+        base.DesignEntity(etBuilder);
+
         etBuilder.Property(nameof(Type)).IsRequired();
     }
 

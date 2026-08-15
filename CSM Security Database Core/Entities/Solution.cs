@@ -29,6 +29,8 @@ public class Solution
 
     /// <inheritdoc/>
     protected override void DesignEntity(EntityTypeBuilder etBuilder) {
+        base.DesignEntity(etBuilder);
+
         etBuilder.Property(nameof(Sign))
             .IsFixedLength()
             .HasMaxLength(5)

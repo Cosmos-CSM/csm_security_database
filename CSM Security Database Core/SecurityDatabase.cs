@@ -5,6 +5,8 @@ using CSM_Security_Database_Core.Entities;
 
 using Microsoft.EntityFrameworkCore;
 
+using EntityState = CSM_Security_Database_Core.Entities.EntityState;
+
 namespace CSM_Security_Database_Core;
 
 /// <summary>
@@ -35,6 +37,7 @@ public class SecurityDatabase
         : base(databaseOptions) {
     }
 
+    
     /// <summary>
     ///     Users DB Set.
     /// </summary>
@@ -74,4 +77,9 @@ public class SecurityDatabase
     ///     Vendors DB Set.
     /// </summary>
     public DbSet<Vendor> Vendors { get; set; } = default!;
+
+    /// <summary>
+    ///     Entity States DB Set.
+    /// </summary>
+    public DbSet<EntityState> EntityStates { get; set; } = default!;
 }

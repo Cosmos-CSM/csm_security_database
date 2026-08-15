@@ -90,7 +90,7 @@ static public class DraftUtils {
     ///     A drafted <see cref="CSM_Security_Database_Core.Entities.Action"/>.
     /// </returns>
     static public Action Action(Action? @ref = null) {
-        return BaseDraftUtils.CatalogEntity(@ref);
+        return BaseDraftUtils.NamedEntity(@ref);
     }
 
     /// <summary>
@@ -123,7 +123,7 @@ static public class DraftUtils {
     ///     A drafted <see cref="CSM_Security_Database_Core.Entities.Feature"/>.
     /// </returns>
     static public Feature Feature(Feature? @ref = null) {
-        @ref = BaseDraftUtils.CatalogEntity(@ref);
+        @ref = BaseDraftUtils.NamedEntity(@ref);
 
         return @ref;
     }
@@ -138,7 +138,7 @@ static public class DraftUtils {
     ///     A drafted <see cref="CSM_Security_Database_Core.Entities.Permit"/>.
     /// </returns>
     static public Permit Permit(Permit? @ref = null) {
-        @ref = BaseDraftUtils.CatalogEntity(@ref);
+        @ref = BaseDraftUtils.NamedEntity(@ref);
 
         @ref.Solution = Solution(@ref.Solution);
         @ref.Feature = Feature(@ref.Feature);
@@ -157,7 +157,7 @@ static public class DraftUtils {
     ///     A drafted <see cref="CSM_Security_Database_Core.Entities.Profile"/>.
     /// </returns>
     static public Profile Profile(Profile? @ref = null) {
-        @ref = BaseDraftUtils.CatalogEntity(@ref);
+        @ref = BaseDraftUtils.NamedEntity(@ref);
 
         return @ref;
     }
@@ -173,7 +173,7 @@ static public class DraftUtils {
     ///     A drafted <see cref="CSM_Security_Database_Core.Entities.Vendor"/>.
     /// </returns>
     static public Vendor Vendor(Vendor? @ref = null) {
-        @ref = BaseDraftUtils.CatalogEntity(@ref);
+        @ref = BaseDraftUtils.NamedEntity(@ref);
         @ref.Type = VendorType.Supplier;
         return @ref;
     }

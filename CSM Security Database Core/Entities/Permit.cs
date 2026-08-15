@@ -11,7 +11,7 @@ namespace CSM_Security_Database_Core.Entities;
 ///     Represents a permit into the ecosystem, to trace security through actions into system.
 /// </summary>
 public class Permit
-    : SecurityCatalogEntityBase {
+    : SecurityNamedEntityBase {
 
     /// <summary>
     ///     Solution data.
@@ -45,6 +45,8 @@ public class Permit
 
     /// <inheritdoc/>
     protected override void DesignEntity(EntityTypeBuilder etBuilder) {
+        base.DesignEntity(etBuilder);
+
         etBuilder.Link<Permit, Solution>(
                 nameof(Solution),
                 isRequired: true,

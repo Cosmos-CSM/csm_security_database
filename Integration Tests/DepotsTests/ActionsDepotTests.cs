@@ -25,7 +25,6 @@ public class ActionsDepotTests
     public override async Task Update_Single_Success() {
         // Expectation
         Action expAction = await _storeManager.StoreAction();
-        Permit expPermit = await _storeManager.StorePermit();
 
         string? oldDescription = expAction.Description;
         expAction.Description = "New description";

@@ -32,6 +32,8 @@ public class UserInfo
 
     /// <inheritdoc/>
     protected override void DesignEntity(EntityTypeBuilder etBuilder) {
+        base.DesignEntity(etBuilder);
+
         etBuilder.Property(nameof(Name))
             .HasMaxLength(100)
             .IsRequired();

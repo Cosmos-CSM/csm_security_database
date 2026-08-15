@@ -37,15 +37,20 @@ public class VendorsDepotTests
                 new QueryInput<Vendor, UpdateInput<Vendor>> {
                     Parameters = new UpdateInput<Vendor> {
                         Entity = vendor,
-                        Relations = new Dictionary<string, CSM_Database_Core.Depots.Models.Structs.RelationUpdate[]> {
+                        Relations = new Dictionary<string, IDictionary<string, CSM_Database_Core.Depots.Models.Structs.RelationUpdate[]>> {
                             {
                                 nameof(Vendor.Users),
-                                [
-                                        new CSM_Database_Core.Depots.Models.Structs.RelationUpdate{
+                                new Dictionary<string, CSM_Database_Core.Depots.Models.Structs.RelationUpdate[]> {
+                                    {
+                                        string.Empty,
+                                        [
+                                            new CSM_Database_Core.Depots.Models.Structs.RelationUpdate{
                                                 Action = CSM_Database_Core.Depots.Models.Structs.RelationUpdateAction.ADD,
                                                 Entity = exUser
                                             }
-                                    ]
+                                        ]
+                                    }
+                                }
                             }
                         },
                     },

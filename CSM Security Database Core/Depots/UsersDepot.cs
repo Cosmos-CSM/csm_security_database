@@ -58,9 +58,9 @@ public class UsersDepot
 
         bool VerifyEffective(Permit permit) {
             return
-                permit.IsEnabled
-                && permit.Feature.IsEnabled
-                && permit.Action.IsEnabled
+                permit.State.Name.ToLower() == "active"
+                && permit.Feature.State.Name.ToLower() == "active"
+                && permit.Action.State.Name.ToLower() == "active"
                 && !effectivePermits.Any(ePermit => ePermit.Id == permit.Id);
         }
 

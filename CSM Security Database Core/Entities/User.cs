@@ -77,6 +77,8 @@ public class User
 
     /// <inheritdoc/>
     protected override void DesignEntity(EntityTypeBuilder etBuilder) {
+        base.DesignEntity(etBuilder);
+
         etBuilder.HasIndex(nameof(Username))
             .IsUnique();
         etBuilder.Property(nameof(Username))

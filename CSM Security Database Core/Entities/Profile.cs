@@ -12,7 +12,7 @@ namespace CSM_Security_Database_Core.Entities;
 ///     Represents a group of permits into th eecosystem for easier security management.
 /// </summary>
 public class Profile
-    : SecurityCatalogEntityBase {
+    : SecurityNamedEntityBase {
 
     /// <summary>
     ///     Permits data.
@@ -28,6 +28,7 @@ public class Profile
 
     /// <inheritdoc/>
     protected override void DesignEntity(EntityTypeBuilder etBuilder) {
+        base.DesignEntity(etBuilder);
 
         etBuilder
             .HasMany(nameof(Permits))

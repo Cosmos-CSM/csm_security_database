@@ -24,7 +24,6 @@ public class FeaturesDepotTests
 
         // Expectations
         string? oldDescription = feature.Description;
-        Permit expPermit = await _storeManager.StorePermit();
 
         // Acting
         feature.Description = "New description random";

@@ -8,7 +8,7 @@ namespace CSM_Security_Database_Core.Entities;
 ///     Represents an ecosystem complex feature.
 /// </summary>
 public class Feature
-    : SecurityCatalogEntityBase {
+    : SecurityNamedEntityBase {
 
     /// <summary>
     ///     Permits data.

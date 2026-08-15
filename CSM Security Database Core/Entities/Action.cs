@@ -8,7 +8,7 @@ namespace CSM_Security_Database_Core.Entities;
 ///     Represents an available ecosystem action.
 /// </summary>
 public class Action
-    : SecurityCatalogEntityBase {
+    : SecurityNamedEntityBase {
 
     /// <summary>
     ///     Permits data.
