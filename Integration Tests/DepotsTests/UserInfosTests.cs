@@ -15,7 +15,9 @@ public class UserInfosTests
     : SecurityDepotIntegrationTestsBase<UserInfo, UserInfosDepot> {
 
     protected override UserInfo EntityFactory(string Entropy) {
-        return DraftUtils.UserInfo();
+        UserInfo userInfo = DraftUtils.UserInfo();
+        userInfo.State = _storeManager.StoreEntityState().Result;
+        return userInfo;
     }
 
     public override async Task Update_Single_Success() {

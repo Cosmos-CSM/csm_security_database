@@ -17,7 +17,9 @@ public class VendorsDepotTests
     : SecurityDepotIntegrationTestsBase<Vendor, VendorsDepot> {
 
     protected override Vendor EntityFactory(string Entropy) {
-        return DraftUtils.Vendor();
+        Vendor vendor = DraftUtils.Vendor();
+        vendor.State = _storeManager.StoreEntityState().Result;
+        return vendor;
     }
 
     public override async Task Update_Single_Success() {

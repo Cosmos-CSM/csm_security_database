@@ -90,7 +90,8 @@ static public class DraftUtils {
     ///     A drafted <see cref="CSM_Security_Database_Core.Entities.Action"/>.
     /// </returns>
     static public Action Action(Action? @ref = null) {
-        return BaseDraftUtils.NamedEntity(@ref);
+        @ref = BaseDraftUtils.NamedEntity(@ref);
+        return @ref;
     }
 
     /// <summary>
@@ -104,11 +105,9 @@ static public class DraftUtils {
     /// </returns>
     static public Solution Solution(Solution? @ref = null) {
         @ref = BaseDraftUtils.NamedEntity(@ref);
-
         if (string.IsNullOrWhiteSpace(@ref.Sign)) {
             @ref.Sign = Epy[..5].ToUpper();
         }
-
 
         return @ref;
     }
@@ -124,7 +123,6 @@ static public class DraftUtils {
     /// </returns>
     static public Feature Feature(Feature? @ref = null) {
         @ref = BaseDraftUtils.NamedEntity(@ref);
-
         return @ref;
     }
 
@@ -139,11 +137,6 @@ static public class DraftUtils {
     /// </returns>
     static public Permit Permit(Permit? @ref = null) {
         @ref = BaseDraftUtils.NamedEntity(@ref);
-
-        @ref.Solution = Solution(@ref.Solution);
-        @ref.Feature = Feature(@ref.Feature);
-        @ref.Action = Action(@ref.Action);
-
         return @ref;
     }
 
@@ -158,7 +151,6 @@ static public class DraftUtils {
     /// </returns>
     static public Profile Profile(Profile? @ref = null) {
         @ref = BaseDraftUtils.NamedEntity(@ref);
-
         return @ref;
     }
 
@@ -175,6 +167,20 @@ static public class DraftUtils {
     static public Vendor Vendor(Vendor? @ref = null) {
         @ref = BaseDraftUtils.NamedEntity(@ref);
         @ref.Type = VendorType.Supplier;
+        return @ref;
+    }
+
+    /// <summary>
+    ///     Drafts a <see cref="CSM_Security_Database_Core.Entities.EntityState"/> data.
+    /// </summary>
+    /// <param name="ref">
+    ///     Default entity data.
+    /// </param>
+    /// <returns>
+    ///     A drafted <see cref="CSM_Security_Database_Core.Entities.EntityState"/>.
+    /// </returns>
+    static public EntityState EntityState(EntityState? @ref = null) {
+        @ref = BaseDraftUtils.NamedEntity(@ref);
         return @ref;
     }
 }

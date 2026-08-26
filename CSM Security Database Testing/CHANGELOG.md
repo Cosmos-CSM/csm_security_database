@@ -1,5 +1,20 @@
 ﻿# CSM Security Database Testing CHANGELOG
 
+## [x.x.x] - xx.xx-xxxx
+
+### Patch 
+- Added [StoreEntityState] method in StoreManager.cs.
+- Added [EntityState] method in DraftUtils.cs.
+- Now all security entities sets its own [EntityState] upon created or stored using [Draft Utils] or [Store Manager] methods.
+ 
+#### Dependencies
+
+| Package                                 | Previous Version | New Version     |
+|:----------------------------------------|:----------------:|:---------------:|
+| CSM.Database.Core                       | 6.1.0            | 7.0.0           |
+| CSM.Database.Testing					  | 7.0.2            | 8.0.0           |
+
+
 ## [3.0.0] - 19.06-2026
 
 ### Changes

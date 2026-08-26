@@ -18,11 +18,12 @@ public class ProfilesDepotTests
     : SecurityDepotIntegrationTestsBase<Profile, ProfilesDepot> {
 
     protected override Profile EntityFactory(string Entropy) {
-        User user = _storeManager.StoreUser().GetAwaiter().GetResult();
-        Permit permit = _storeManager.StorePermit().GetAwaiter().GetResult();
+        User user = _storeManager.StoreUser().Result;
+        Permit permit = _storeManager.StorePermit().Result;
 
-        return DraftUtils.Profile(
+        Profile profile = DraftUtils.Profile(
                 new Profile {
+                    State = _storeManager.StoreEntityState().Result,
                     Users = [
                             user,
                         ],
@@ -31,6 +32,7 @@ public class ProfilesDepotTests
                         ]
                 }
             );
+        return profile;
     }
 
     public override async Task Update_Single_Success() {

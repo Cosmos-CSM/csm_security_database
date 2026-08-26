@@ -1,7 +1,6 @@
 ﻿using CSM_Database_Core.Depots.Models;
 
 using CSM_Security_Database_Core.Depots;
-using CSM_Security_Database_Core.Entities;
 
 using CSM_Security_Database_Testing.Abstractions.Bases;
 using CSM_Security_Database_Testing.Utils;
@@ -17,14 +16,17 @@ public class ActionsDepotTests
     : SecurityDepotIntegrationTestsBase<Action, ActionsDepot> {
 
     protected override Action EntityFactory(string entropy) {
-        return DraftUtils.Action();
+        Action action = DraftUtils.Action();
+        action.State = _storeManager.StoreEntityState().Result;
+        return action;
     }
-
-
 
     public override async Task Update_Single_Success() {
         // Expectation
-        Action expAction = await _storeManager.StoreAction();
+        Action expAction = DraftUtils.Action();
+        expAction.State = await _storeManager.StoreEntityState();
+
+        await Store(expAction);
 
         string? oldDescription = expAction.Description;
         expAction.Description = "New description";

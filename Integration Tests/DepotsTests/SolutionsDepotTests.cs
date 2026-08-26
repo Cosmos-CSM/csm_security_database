@@ -15,7 +15,9 @@ public class SolutionsDepotTests
     : SecurityDepotIntegrationTestsBase<Solution, SolutionsDepot> {
 
     protected override Solution EntityFactory(string Entropy) {
-        return DraftUtils.Solution();
+        Solution solution = DraftUtils.Solution();
+        solution.State = _storeManager.StoreEntityState().Result;
+        return solution;
     }
 
     public override async Task Update_Single_Success() {

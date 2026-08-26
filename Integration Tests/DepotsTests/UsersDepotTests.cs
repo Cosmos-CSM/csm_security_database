@@ -15,11 +15,13 @@ public class UsersDepotTests
     : SecurityDepotIntegrationTestsBase<User, UsersDepot> {
 
     protected override User EntityFactory(string Entropy) {
-        return DraftUtils.User(
+        User user = DraftUtils.User(
                 new User {
-                    UserInfo = Store(DraftUtils.UserInfo()).GetAwaiter().GetResult(),
+                    State = _storeManager.StoreEntityState().Result,
+                    UserInfo = _storeManager.StoreUserInfo().Result,
                 }
             );
+        return user;
     }
 
     public override async Task Update_Single_Success() {

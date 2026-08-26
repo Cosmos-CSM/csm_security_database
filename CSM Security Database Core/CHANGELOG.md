@@ -1,5 +1,17 @@
 ﻿# CSM Security Database CHANGELOG
 
+## [x.x.x] - xx.xx.xxxx
+
+### Patch
+
+- Added [Entity State] entity to track the state of entities in the database.
+
+#### Dependencies
+
+| Package                                 | Previous Version | New Version     |
+|:----------------------------------------|:----------------:|:---------------:|
+| CSM.Database.Core                       | 6.1.0            | 7.0.0           |
+
 ## [3.1.0] - 24.06.2026
 
 ### Patch
