@@ -18,7 +18,6 @@ public class PermitsDepotTests
     protected override Permit EntityFactory(string Entropy) {
         Permit permit = DraftUtils.Permit(
                 new Permit {
-                    State = _storeManager.StoreEntityState().Result,
                     Action = _storeManager.StoreAction().Result,
                     Feature = _storeManager.StoreFeature().Result,  
                     Solution = _storeManager.StoreSolution().Result,

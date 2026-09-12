@@ -17,7 +17,6 @@ public class UsersDepotTests
     protected override User EntityFactory(string Entropy) {
         User user = DraftUtils.User(
                 new User {
-                    State = _storeManager.StoreEntityState().Result,
                     UserInfo = _storeManager.StoreUserInfo().Result,
                 }
             );

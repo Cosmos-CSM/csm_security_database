@@ -23,7 +23,6 @@ public class ProfilesDepotTests
 
         Profile profile = DraftUtils.Profile(
                 new Profile {
-                    State = _storeManager.StoreEntityState().Result,
                     Users = [
                             user,
                         ],

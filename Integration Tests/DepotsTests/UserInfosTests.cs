@@ -16,7 +16,6 @@ public class UserInfosTests
 
     protected override UserInfo EntityFactory(string Entropy) {
         UserInfo userInfo = DraftUtils.UserInfo();
-        userInfo.State = _storeManager.StoreEntityState().Result;
         return userInfo;
     }
 

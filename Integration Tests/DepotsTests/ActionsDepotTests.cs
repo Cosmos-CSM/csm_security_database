@@ -17,14 +17,12 @@ public class ActionsDepotTests
 
     protected override Action EntityFactory(string entropy) {
         Action action = DraftUtils.Action();
-        action.State = _storeManager.StoreEntityState().Result;
         return action;
     }
 
     public override async Task Update_Single_Success() {
         // Expectation
         Action expAction = DraftUtils.Action();
-        expAction.State = await _storeManager.StoreEntityState();
 
         await Store(expAction);
 

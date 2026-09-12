@@ -38,41 +38,9 @@ namespace CSM_Security.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<long>("StateShadow")
-                        .HasColumnType("bigint")
-                        .HasColumnName("State");
-
-                    b.Property<DateTime>("Timestamp")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2(7)")
-                        .HasDefaultValueSql("GETUTCDATE()");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.HasIndex("StateShadow");
-
-                    b.ToTable("Actions");
-                });
-
-            modelBuilder.Entity("CSM_Security_Database_Core.Entities.EntityState", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<long>("State")
                         .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
                     b.Property<DateTime>("Timestamp")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2(7)")
@@ -83,7 +51,7 @@ namespace CSM_Security.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("EntityStates");
+                    b.ToTable("Actions");
                 });
 
             modelBuilder.Entity("CSM_Security_Database_Core.Entities.Feature", b =>
@@ -102,9 +70,8 @@ namespace CSM_Security.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<long>("StateShadow")
-                        .HasColumnType("bigint")
-                        .HasColumnName("State");
+                    b.Property<long>("State")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("Timestamp")
                         .ValueGeneratedOnAdd()
@@ -115,8 +82,6 @@ namespace CSM_Security.Migrations
 
                     b.HasIndex("Name")
                         .IsUnique();
-
-                    b.HasIndex("StateShadow");
 
                     b.ToTable("Features");
                 });
@@ -149,9 +114,8 @@ namespace CSM_Security.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("Solution");
 
-                    b.Property<long>("StateShadow")
-                        .HasColumnType("bigint")
-                        .HasColumnName("State");
+                    b.Property<long>("State")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("Timestamp")
                         .ValueGeneratedOnAdd()
@@ -166,8 +130,6 @@ namespace CSM_Security.Migrations
                         .IsUnique();
 
                     b.HasIndex("SolutionShadow");
-
-                    b.HasIndex("StateShadow");
 
                     b.HasIndex("ActionShadow", "SolutionShadow", "FeatureShadow");
 
@@ -190,9 +152,8 @@ namespace CSM_Security.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<long>("StateShadow")
-                        .HasColumnType("bigint")
-                        .HasColumnName("State");
+                    b.Property<long>("State")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("Timestamp")
                         .ValueGeneratedOnAdd()
@@ -203,8 +164,6 @@ namespace CSM_Security.Migrations
 
                     b.HasIndex("Name")
                         .IsUnique();
-
-                    b.HasIndex("StateShadow");
 
                     b.ToTable("Profiles");
                 });
@@ -231,9 +190,8 @@ namespace CSM_Security.Migrations
                         .HasColumnType("nchar(5)")
                         .IsFixedLength();
 
-                    b.Property<long>("StateShadow")
-                        .HasColumnType("bigint")
-                        .HasColumnName("State");
+                    b.Property<long>("State")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("Timestamp")
                         .ValueGeneratedOnAdd()
@@ -247,8 +205,6 @@ namespace CSM_Security.Migrations
 
                     b.HasIndex("Sign")
                         .IsUnique();
-
-                    b.HasIndex("StateShadow");
 
                     b.ToTable("Solutions");
                 });
@@ -268,9 +224,8 @@ namespace CSM_Security.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<long>("StateShadow")
-                        .HasColumnType("bigint")
-                        .HasColumnName("State");
+                    b.Property<long>("State")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("Timestamp")
                         .ValueGeneratedOnAdd()
@@ -290,8 +245,6 @@ namespace CSM_Security.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("StateShadow");
 
                     b.HasIndex("UserInfoShadow")
                         .IsUnique();
@@ -330,9 +283,8 @@ namespace CSM_Security.Migrations
                         .HasMaxLength(14)
                         .HasColumnType("nvarchar(14)");
 
-                    b.Property<long>("StateShadow")
-                        .HasColumnType("bigint")
-                        .HasColumnName("State");
+                    b.Property<long>("State")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("Timestamp")
                         .ValueGeneratedOnAdd()
@@ -346,8 +298,6 @@ namespace CSM_Security.Migrations
 
                     b.HasIndex("Phone")
                         .IsUnique();
-
-                    b.HasIndex("StateShadow");
 
                     b.ToTable("UserInfos");
                 });
@@ -368,9 +318,8 @@ namespace CSM_Security.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<long>("StateShadow")
-                        .HasColumnType("bigint")
-                        .HasColumnName("State");
+                    b.Property<long>("State")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("Timestamp")
                         .ValueGeneratedOnAdd()
@@ -384,8 +333,6 @@ namespace CSM_Security.Migrations
 
                     b.HasIndex("Name")
                         .IsUnique();
-
-                    b.HasIndex("StateShadow");
 
                     b.ToTable("Vendors");
                 });
@@ -450,28 +397,6 @@ namespace CSM_Security.Migrations
                     b.ToTable("Users_Vendors");
                 });
 
-            modelBuilder.Entity("CSM_Security_Database_Core.Entities.Action", b =>
-                {
-                    b.HasOne("CSM_Security_Database_Core.Entities.EntityState", "State")
-                        .WithMany()
-                        .HasForeignKey("StateShadow")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("State");
-                });
-
-            modelBuilder.Entity("CSM_Security_Database_Core.Entities.Feature", b =>
-                {
-                    b.HasOne("CSM_Security_Database_Core.Entities.EntityState", "State")
-                        .WithMany()
-                        .HasForeignKey("StateShadow")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("State");
-                });
-
             modelBuilder.Entity("CSM_Security_Database_Core.Entities.Permit", b =>
                 {
                     b.HasOne("CSM_Security_Database_Core.Entities.Action", "Action")
@@ -492,82 +417,22 @@ namespace CSM_Security.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("CSM_Security_Database_Core.Entities.EntityState", "State")
-                        .WithMany()
-                        .HasForeignKey("StateShadow")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("Action");
 
                     b.Navigation("Feature");
 
                     b.Navigation("Solution");
-
-                    b.Navigation("State");
-                });
-
-            modelBuilder.Entity("CSM_Security_Database_Core.Entities.Profile", b =>
-                {
-                    b.HasOne("CSM_Security_Database_Core.Entities.EntityState", "State")
-                        .WithMany()
-                        .HasForeignKey("StateShadow")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("State");
-                });
-
-            modelBuilder.Entity("CSM_Security_Database_Core.Entities.Solution", b =>
-                {
-                    b.HasOne("CSM_Security_Database_Core.Entities.EntityState", "State")
-                        .WithMany()
-                        .HasForeignKey("StateShadow")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("State");
                 });
 
             modelBuilder.Entity("CSM_Security_Database_Core.Entities.User", b =>
                 {
-                    b.HasOne("CSM_Security_Database_Core.Entities.EntityState", "State")
-                        .WithMany()
-                        .HasForeignKey("StateShadow")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("CSM_Security_Database_Core.Entities.UserInfo", "UserInfo")
                         .WithOne()
                         .HasForeignKey("CSM_Security_Database_Core.Entities.User", "UserInfoShadow")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("State");
-
                     b.Navigation("UserInfo");
-                });
-
-            modelBuilder.Entity("CSM_Security_Database_Core.Entities.UserInfo", b =>
-                {
-                    b.HasOne("CSM_Security_Database_Core.Entities.EntityState", "State")
-                        .WithMany()
-                        .HasForeignKey("StateShadow")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("State");
-                });
-
-            modelBuilder.Entity("CSM_Security_Database_Core.Entities.Vendor", b =>
-                {
-                    b.HasOne("CSM_Security_Database_Core.Entities.EntityState", "State")
-                        .WithMany()
-                        .HasForeignKey("StateShadow")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("State");
                 });
 
             modelBuilder.Entity("Profiles_Permits", b =>

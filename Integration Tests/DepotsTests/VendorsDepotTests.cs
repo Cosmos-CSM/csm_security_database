@@ -18,7 +18,6 @@ public class VendorsDepotTests
 
     protected override Vendor EntityFactory(string Entropy) {
         Vendor vendor = DraftUtils.Vendor();
-        vendor.State = _storeManager.StoreEntityState().Result;
         return vendor;
     }
 

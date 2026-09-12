@@ -16,7 +16,6 @@ public class SolutionsDepotTests
 
     protected override Solution EntityFactory(string Entropy) {
         Solution solution = DraftUtils.Solution();
-        solution.State = _storeManager.StoreEntityState().Result;
         return solution;
     }
 

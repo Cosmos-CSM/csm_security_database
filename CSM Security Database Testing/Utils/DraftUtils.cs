@@ -169,18 +169,4 @@ static public class DraftUtils {
         @ref.Type = VendorType.Supplier;
         return @ref;
     }
-
-    /// <summary>
-    ///     Drafts a <see cref="CSM_Security_Database_Core.Entities.EntityState"/> data.
-    /// </summary>
-    /// <param name="ref">
-    ///     Default entity data.
-    /// </param>
-    /// <returns>
-    ///     A drafted <see cref="CSM_Security_Database_Core.Entities.EntityState"/>.
-    /// </returns>
-    static public EntityState EntityState(EntityState? @ref = null) {
-        @ref = BaseDraftUtils.NamedEntity(@ref);
-        return @ref;
-    }
 }

@@ -17,14 +17,12 @@ public class FeaturesDepotTests
     protected override Feature EntityFactory(string Entropy) {
 
         Feature feature = DraftUtils.Feature();
-        feature.State = _storeManager.StoreEntityState().Result;
         return feature;
     }
 
     public override async Task Update_Single_Success() {
         // Setting
         Feature feature = DraftUtils.Feature();
-        feature.State = await _storeManager.StoreEntityState();
 
         await Store(feature);
 

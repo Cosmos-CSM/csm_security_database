@@ -34,7 +34,6 @@ public class StoreManager {
     /// </returns>
     public async Task<Feature> StoreFeature(Feature? @ref = null) {
         Feature feature = DraftUtils.Feature(@ref);
-        feature.State = await StoreEntityState(@ref?.State);
 
         return await _storeManager.Store(feature);
     }
@@ -50,7 +49,6 @@ public class StoreManager {
     /// </returns>
     public async Task<Solution> StoreSolution(Solution? @ref = null) {
         Solution solution = DraftUtils.Solution(@ref);
-        solution.State = await StoreEntityState(@ref?.State);
 
         return await _storeManager.Store(solution);
     }
@@ -66,7 +64,6 @@ public class StoreManager {
     /// </returns>
     public async Task<Permit> StorePermit(Permit? @ref = null) {
         Permit permit = DraftUtils.Permit(@ref);
-        permit.State = await StoreEntityState(@ref?.State);
 
         if (permit.Action == null || permit.Action?.Id <= 0) {
             permit.Action = await StoreAction(permit.Action);
@@ -93,7 +90,6 @@ public class StoreManager {
     public async Task<Permit[]> StorePermits(params Permit[] @refs) {
         foreach (Permit @ref in refs) {
             Permit permit = DraftUtils.Permit(@ref);
-            permit.State = await StoreEntityState(@ref?.State);
 
             if (permit.Action == null || permit.Action?.Id <= 0)
                 permit.Action = await StoreAction(permit.Action);
@@ -119,7 +115,6 @@ public class StoreManager {
     /// </returns>
     public async Task<Profile> StoreProfile(Profile? @ref = null) {
         Profile profile = DraftUtils.Profile(@ref);
-        profile.State = await StoreEntityState(@ref?.State);
 
         List<Permit> permitsToStore = [];
         foreach (Permit profilePermit in profile.Permits) {
@@ -150,7 +145,6 @@ public class StoreManager {
     /// </returns>
     public async Task<User> StoreUser(User? @ref = null) {
         User user = DraftUtils.User(@ref);
-        user.State = await StoreEntityState(@ref?.State);
 
         if (user.UserInfo.Id <= 0)
             await StoreUserInfo(user.UserInfo);
@@ -170,7 +164,6 @@ public class StoreManager {
     public async Task<User[]> StoreUsers(params User[] @refs) {
         foreach (User @ref in @refs) {
             User user = DraftUtils.User(@ref);
-            user.State = await StoreEntityState(@ref?.State);
 
             if (user.UserInfo?.Id <= 0)
                 await StoreUserInfo(user.UserInfo);
@@ -192,7 +185,6 @@ public class StoreManager {
     /// </returns>
     public async Task<UserInfo> StoreUserInfo(UserInfo? @ref = null) {
         UserInfo userInfo = DraftUtils.UserInfo(@ref);
-        userInfo.State = await StoreEntityState(@ref?.State);
 
         return await _storeManager.Store(userInfo);
     }
@@ -208,7 +200,6 @@ public class StoreManager {
     /// </returns>
     public async Task<Vendor> StoreVendor(Vendor? @ref = null) {
         Vendor vendor = DraftUtils.Vendor(@ref);
-        vendor.State = await StoreEntityState(@ref?.State);
 
         List<User> usersToStore = [];
         foreach (User vendorUser in vendor.Users) {
@@ -232,21 +223,6 @@ public class StoreManager {
     /// </returns>
     public async Task<CSM_Security_Database_Core.Entities.Action> StoreAction(CSM_Security_Database_Core.Entities.Action? @ref = null) {
         CSM_Security_Database_Core.Entities.Action action = DraftUtils.Action(@ref);
-        action.State = await StoreEntityState(@ref?.State);
         return await _storeManager.Store(action);
-    }
-
-    /// <summary>
-    ///     Stores a <see cref="EntityState"/> test object.
-    /// </summary>
-    /// <param name="ref">
-    ///     Data reference.
-    /// </param>
-    /// <returns>
-    ///     A test data stored <see cref="EntityState"/>.
-    /// </returns>
-    public async Task<EntityState> StoreEntityState(EntityState? @ref = null) {
-        EntityState entityState = DraftUtils.EntityState(@ref);
-        return await _storeManager.Store(entityState);
     }
 }

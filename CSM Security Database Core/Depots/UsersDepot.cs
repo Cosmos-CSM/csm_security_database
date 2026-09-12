@@ -57,11 +57,7 @@ public class UsersDepot
         List<Permit> effectivePermits = [];
 
         bool VerifyEffective(Permit permit) {
-            return
-                permit.State.Name.ToLower() == "active"
-                && permit.Feature.State.Name.ToLower() == "active"
-                && permit.Action.State.Name.ToLower() == "active"
-                && !effectivePermits.Any(ePermit => ePermit.Id == permit.Id);
+            return !effectivePermits.Any(ePermit => ePermit.Id == permit.Id);
         }
 
 
